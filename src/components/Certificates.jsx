@@ -88,13 +88,13 @@ const Certificates = () => {
     const scrollRef = useRef(null);
 
     const certificates = [
-        { title: "Full Stack Web Development", issuer: "Mount Zion Engineering", image: cert1 },
-        { title: "React & Modern UI Design", issuer: "Technical Workshop", image: cert2 },
-        { title: "Cloud Computing Fundamentals", issuer: "Mount Zion College", image: cert3 },
-        { title: "Ethical Hacking Essentials", issuer: "Cyber Security Lab", image: cert4 },
-        { title: "Database Systems & SQL", issuer: "Industrial Training", image: cert5 },
-        { title: "JavaScript Algorithms", issuer: "External Certification", image: cert6 },
-        { title: "Specialized Tech Achievement", issuer: "Academic Excellence", image: cert7 },
+        { title: "JavaScript", issuer: "infosys springboard", image: cert1 },
+        { title: "Html & Css", issuer: "Guvi", image: cert2 },
+        { title: "Python", issuer: "Nativeva", image: cert3 },
+        { title: "Ethical Hacking ", issuer: "Guvi", image: cert4 },
+        { title: "MongoDB", issuer: "MongoDB", image: cert5 },
+        { title: "Git & Github", issuer: "Guvi", image: cert6 },
+        { title: "Generative AI", issuer: "Guvi", image: cert7 },
     ];
 
     const scroll = (direction) => {
