@@ -3,9 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
 
 permissions:
   contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -21,19 +27,9 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      # Publish production build to docs/ on main (for GitHub Pages: main + /docs)
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: main
-          publish_dir: ./dist
-          destination_dir: docs
-          keep_files: true
-          commit_message: "deploy: update GitHub Pages build in docs/"
-
-      # Also keep gh-pages branch in sync for branch-based Pages setups
-      - uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          commit_message: "deploy: update gh-pages branch"
+          commit_message: 'deploy: update GitHub Pages build'
