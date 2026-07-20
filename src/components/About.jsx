@@ -1,143 +1,243 @@
 import React from 'react';
-import { GraduationCap, MapPin, School, Globe, ShoppingBag, ArrowUpRight } from 'lucide-react';
-import studentImg from '../assets/student.jpeg';
+import { motion } from 'framer-motion';
+import { Lightbulb, Target, Code, Users } from 'lucide-react';
+
+const coreValues = [
+  { name: 'Innovation', icon: Lightbulb },
+  { name: 'Problem Solving', icon: Target },
+  { name: 'Clean Code', icon: Code },
+  { name: 'User-Centered Design', icon: Users }
+];
 
 const About = () => {
-    return (
-        <section id="about">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
-                
-                {/* Intro Title */}
-                <div style={{ textAlign: 'center' }}>
-                    <span className="section-label">Profile</span>
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
-                        About <span className="gradient-text">Me & My Ventures</span>
-                    </h2>
-                    <p style={{ color: 'var(--text-dim)', maxWidth: '600px', margin: '0 auto' }}>
-                        Passionate about crafting outstanding digital experiences and scaling online businesses.
-                    </p>
-                </div>
+  return (
+    <>
+      <style>{`
+        .about-section {
+          padding: 100px 40px;
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+        }
 
-                {/* Main Content Grid */}
-                <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-                    gap: '40px', 
-                    alignItems: 'start' 
-                }}>
-                    
-                    {/* Left: Bio Card & Image */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                        <div style={{ position: 'relative' }}>
-                            <div style={{
-                                position: 'absolute',
-                                top: '8px',
-                                left: '8px',
-                                right: '-8px',
-                                bottom: '-8px',
-                                background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-                                borderRadius: '24px',
-                                zIndex: -1,
-                                opacity: 0.6
-                            }} />
-                            <div className="glass-card" style={{ padding: '0', overflow: 'hidden', borderRadius: '24px' }}>
-                                <img src={studentImg} alt="S Hariharan" style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '480px', objectFit: 'cover', objectPosition: 'top' }} />
-                            </div>
-                        </div>
+        .about-grid {
+          display: grid;
+          grid-template-columns: 0.9fr 1.1fr;
+          gap: 80px;
+          align-items: center;
+        }
 
-                        {/* Quick Info Grid */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            <div className="glass-card" style={{ padding: '20px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-                                <div style={{ color: 'var(--primary)' }}><School size={24} /></div>
-                                <div>
-                                    <h4 style={{ color: 'white', fontSize: '0.95rem' }}>Institution</h4>
-                                    <p style={{ color: 'var(--text-dim)', fontSize: '0.85rem' }}>Mount Zion College of Engineering & Tech</p>
-                                </div>
-                            </div>
-                            <div className="glass-card" style={{ padding: '20px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-                                <div style={{ color: 'var(--secondary)' }}><GraduationCap size={24} /></div>
-                                <div>
-                                    <h4 style={{ color: 'white', fontSize: '0.95rem' }}>Degree</h4>
-                                    <p style={{ color: 'var(--text-dim)', fontSize: '0.85rem' }}>Bachelor of Technology (B.Tech)</p>
-                                </div>
-                            </div>
-                            <div className="glass-card" style={{ padding: '20px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-                                <div style={{ color: 'var(--accent)' }}><MapPin size={24} /></div>
-                                <div>
-                                    <h4 style={{ color: 'white', fontSize: '0.95rem' }}>Location</h4>
-                                    <p style={{ color: 'var(--text-dim)', fontSize: '0.85rem' }}>India</p>
-                                </div>
-                            </div>
-                        </div>
+        /* Services Timeline on the Left */
+        .about-services-timeline {
+          position: relative;
+          padding-left: 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 48px;
+        }
+
+        .about-services-timeline::before {
+          content: '';
+          position: absolute;
+          left: 4px;
+          top: 15px;
+          bottom: 15px;
+          width: 2px;
+          background-color: rgba(255, 94, 67, 0.15);
+        }
+
+        .about-service-item {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .about-service-node {
+          position: absolute;
+          left: -40px;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 10px;
+          height: 10px;
+          background-color: #ff5e43;
+          border-radius: 2px; /* Square bullet matching mockup */
+          box-shadow: 0 0 10px rgba(255, 94, 67, 0.4);
+        }
+
+        .about-service-icon-box {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: rgba(255, 94, 67, 0.05);
+          border: 1px solid rgba(255, 94, 67, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #ff5e43;
+          flex-shrink: 0;
+          transition: all 0.3s ease;
+        }
+
+        .about-service-item:hover .about-service-icon-box {
+          background: #ff5e43;
+          color: white;
+          border-color: #ff5e43;
+          box-shadow: 0 6px 20px rgba(255, 94, 67, 0.3);
+          transform: scale(1.05);
+        }
+
+        .about-service-name {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.15rem;
+          font-weight: 600;
+          color: white;
+          letter-spacing: -0.01em;
+        }
+
+        /* About Text and Stats on the Right */
+        .about-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .about-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 800;
+          color: white;
+          margin-bottom: 24px;
+          letter-spacing: -0.02em;
+        }
+
+        .about-desc {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 1.05rem;
+          color: #94a3b8;
+          line-height: 1.8;
+          margin-bottom: 40px;
+        }
+
+        .about-stats-container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+          width: 100%;
+        }
+
+        .about-stat-item {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .about-stat-number {
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(2rem, 3.5vw, 2.8rem);
+          font-weight: 800;
+          color: #ff5e43;
+          margin-bottom: 6px;
+          line-height: 1;
+        }
+
+        .about-stat-label {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 0.85rem;
+          color: #64748b;
+          line-height: 1.4;
+          font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+          .about-grid {
+            grid-template-columns: 1fr;
+            gap: 60px;
+          }
+          .about-section {
+            padding: 80px 24px;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .about-section {
+            padding: 60px 16px;
+          }
+          .about-stats-container {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+          .about-services-timeline {
+            gap: 36px;
+          }
+        }
+      `}</style>
+
+      <section id="about" className="about-section">
+        <div className="about-grid">
+          <motion.div 
+            className="about-left"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="about-services-timeline">
+              {coreValues.map((value, index) => {
+                const IconComponent = value.icon;
+                return (
+                  <div className="about-service-item" key={value.name}>
+                    <div className="about-service-node" />
+                    <div className="about-service-icon-box">
+                      <IconComponent size={20} />
                     </div>
-
-                    {/* Right: Detailed Venture Cards */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                        
-                        {/* Biography */}
-                        <div className="glass-card" style={{ padding: '30px' }}>
-                            <h3 style={{ fontSize: '1.4rem', marginBottom: '15px', color: 'white' }}>Who is Hariharan?</h3>
-                            <p style={{ color: 'var(--text-dim)', marginBottom: '15px', lineHeight: '1.7', fontSize: '0.95rem' }}>
-                                I am a professional <span style={{ color: 'white', fontWeight: '600' }}>Full-Stack Developer</span> specializing in React, Node.js, and modern cloud databases. By combining technical execution with business strategy, I design high-performance applications that deliver real business value.
-                            </p>
-                            <p style={{ color: 'var(--text-dim)', lineHeight: '1.7', fontSize: '0.95rem' }}>
-                                Currently, I balance my academic pursuits with scaling professional service and e-commerce companies, offering state-of-the-art web technology and digital product systems globally.
-                            </p>
-                        </div>
-
-                        {/* Skyrovix Freelance */}
-                        <div className="glass-card" style={{ padding: '30px', position: 'relative' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '15px' }}>
-                                <div>
-                                    <span style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Freelance Agency</span>
-                                    <h3 style={{ fontSize: '1.4rem', color: 'white', marginTop: '4px' }}>Skyrovix Webtech</h3>
-                                </div>
-                                <a href="https://hariharan1022.github.io/sk_web_tech/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>
-                                    <ArrowUpRight size={20} />
-                                </a>
-                            </div>
-                            <p style={{ color: 'var(--text-dim)', fontSize: '0.92rem', lineHeight: '1.7', marginBottom: '15px' }}>
-                                A premium digital agency delivering bespoke web applications, custom platforms, and software solutions. Under Skyrovix, I construct beautiful, high-speed, and secure user experiences for global clients.
-                            </p>
-                            <a href="https://hariharan1022.github.io/sk_web_tech/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
-                                Visit Skyrovix Website <Globe size={14} />
-                            </a>
-                        </div>
-
-                        {/* E-Commerce Ventures */}
-                        <div className="glass-card" style={{ padding: '30px' }}>
-                            <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '15px' }}>
-                                <div style={{ color: 'var(--accent)' }}><ShoppingBag size={24} /></div>
-                                <div>
-                                    <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em' }}>E-Commerce Business</span>
-                                    <h3 style={{ fontSize: '1.4rem', color: 'white', marginTop: '2px' }}>Global E-Commerce</h3>
-                                </div>
-                            </div>
-                            <p style={{ color: 'var(--text-dim)', fontSize: '0.92rem', lineHeight: '1.7', marginBottom: '15px' }}>
-                                Architecting custom sales platforms and optimizing marketplace presence. I run high-volume sales channels spanning **Etsy**, **eBay**, and custom online stores, leveraging automated **Print-on-Demand** workflows and intelligent target-market analytics.
-                            </p>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                                {['Etsy', 'eBay', 'Print-on-Demand', 'Custom Stores'].map(tag => (
-                                    <span key={tag} style={{
-                                        fontSize: '0.8rem',
-                                        padding: '4px 10px',
-                                        background: 'rgba(217, 70, 239, 0.08)',
-                                        border: '1px solid rgba(217, 70, 239, 0.15)',
-                                        color: 'var(--accent)',
-                                        borderRadius: '6px',
-                                        fontWeight: '600'
-                                    }}>{tag}</span>
-                                ))}
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
+                    <span className="about-service-name">{value.name}</span>
+                  </div>
+                );
+              })}
             </div>
-        </section>
-    );
+          </motion.div>
+
+          <motion.div 
+            className="about-right"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h2 className="about-title">About me</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
+              <p className="about-desc" style={{ marginBottom: 0 }}>
+                Hello! I'm Hariharan S, a passionate Full Stack Developer and the Founder of Skyrovix. I specialize in designing and developing modern web applications using today's most powerful technologies, with a strong focus on performance, scalability, and user experience.
+              </p>
+              <p className="about-desc" style={{ marginBottom: 0 }}>
+                As the founder of Skyrovix, I lead the design and development of innovative software solutions, AI-powered applications, and internship management platforms. I enjoy turning ideas into fully functional products that are efficient, secure, and maintainable.
+              </p>
+              <div style={{ padding: '16px 20px', background: 'rgba(255, 94, 67, 0.05)', borderLeft: '3px solid #ff5e43', borderRadius: '0 8px 8px 0', margin: '8px 0' }}>
+                <p className="about-desc" style={{ marginBottom: 0, fontStyle: 'italic', color: '#cbd5e1' }}>
+                  "My mission is to create impactful digital products that simplify complex problems and provide exceptional user experiences."
+                </p>
+              </div>
+            </div>
+            
+            <div className="about-stats-container">
+              <div className="about-stat-item">
+                <span className="about-stat-number">7+</span>
+                <span className="about-stat-label">Projects Built</span>
+              </div>
+              <div className="about-stat-item">
+                <span className="about-stat-number">2026</span>
+                <span className="about-stat-label">Founded Skyrovix</span>
+              </div>
+              <div className="about-stat-item">
+                <span className="about-stat-number">5+</span>
+                <span className="about-stat-label">Technologies Used</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default About;

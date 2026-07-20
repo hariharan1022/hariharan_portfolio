@@ -1,451 +1,505 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, ExternalLink, Code2, ShoppingBag, Globe, Sparkles } from 'lucide-react';
-import bgImage from '../assets/bg.png';
+import { Github, Linkedin, MessageSquare, Instagram } from 'lucide-react';
+import studentImg from '../assets/student.png';
 
-const TYPED_STRINGS = [
-  'Full Stack Developer',
-  'Skyrovix Founder',
-  'E-Commerce Builder',
-  'UI/UX Craftsman',
+const skills = [
+  'JavaScript',
+  'TypeScript',
+  'Python',
+  'React.js',
+  'Node.js',
+  'PostgreSQL',
+  'AI Integration'
 ];
 
-function useTypewriter(strings, speed = 65, pause = 1800) {
-  const [text, setText] = useState('');
-  const [strIdx, setStrIdx] = useState(0);
-  const [charIdx, setCharIdx] = useState(0);
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = strings[strIdx];
-    let timeout;
-    if (!deleting && charIdx < current.length) {
-      timeout = setTimeout(() => setCharIdx(c => c + 1), speed);
-    } else if (!deleting && charIdx === current.length) {
-      timeout = setTimeout(() => setDeleting(true), pause);
-    } else if (deleting && charIdx > 0) {
-      timeout = setTimeout(() => setCharIdx(c => c - 1), speed / 2);
-    } else if (deleting && charIdx === 0) {
-      setDeleting(false);
-      setStrIdx(s => (s + 1) % strings.length);
-    }
-    setText(current.substring(0, charIdx));
-    return () => clearTimeout(timeout);
-  }, [charIdx, deleting, strIdx, strings, speed, pause]);
-
-  return text;
-}
-
-const StatCard = ({ value, label, icon, color, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay, duration: 0.5 }}
-    whileHover={{ y: -4 }}
-    style={{
-      background: 'rgba(255,255,255,0.03)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '16px',
-      padding: '20px 24px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '14px',
-      flex: '1 1 180px',
-      backdropFilter: 'blur(10px)',
-      cursor: 'default',
-    }}
-  >
-    <div style={{
-      width: '44px', height: '44px', borderRadius: '12px',
-      background: `${color}15`,
-      border: `1px solid ${color}25`,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color, flexShrink: 0,
-    }}>
-      {icon}
-    </div>
-    <div>
-      <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'white', fontFamily: 'Outfit', lineHeight: 1 }}>{value}</div>
-      <div style={{ fontSize: '0.78rem', color: 'rgba(156,163,175,0.75)', marginTop: '5px' }}>{label}</div>
-    </div>
-  </motion.div>
-);
-
 const Hero = () => {
-  const typed = useTypewriter(TYPED_STRINGS);
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animId;
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    const particles = Array.from({ length: 70 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.8 + 0.4,
-      dx: (Math.random() - 0.5) * 0.25,
-      dy: (Math.random() - 0.5) * 0.25,
-      alpha: Math.random() * 0.35 + 0.08,
-    }));
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(139,92,246,${p.alpha})`;
-        ctx.fill();
-        p.x += p.dx; p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-      });
-      animId = requestAnimationFrame(draw);
-    };
-    draw();
-    window.addEventListener('resize', resize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
-  }, []);
-
-  const codeLines = [
-    <><span style={{color:'#c084fc'}}>const </span><span style={{color:'#818cf8'}}>developer</span><span style={{color:'#e2e8f0'}}> = {'{'}</span></>,
-    <><span style={{color:'#f472b6'}}>  name</span><span style={{color:'#e2e8f0'}}>: </span><span style={{color:'#34d399'}}>"S Hariharan"</span><span style={{color:'#e2e8f0'}}>,</span></>,
-    <><span style={{color:'#f472b6'}}>  role</span><span style={{color:'#e2e8f0'}}>: </span><span style={{color:'#34d399'}}>"Full Stack Dev"</span><span style={{color:'#e2e8f0'}}>,</span></>,
-    <><span style={{color:'#f472b6'}}>  agency</span><span style={{color:'#e2e8f0'}}>: </span><span style={{color:'#34d399'}}>"Skyrovix"</span><span style={{color:'#e2e8f0'}}>,</span></>,
-    <><span style={{color:'#f472b6'}}>  stack</span><span style={{color:'#e2e8f0'}}>: [</span><span style={{color:'#34d399'}}>"React"</span><span style={{color:'#e2e8f0'}}>, </span><span style={{color:'#34d399'}}>"Node"</span><span style={{color:'#e2e8f0'}}>, </span><span style={{color:'#34d399'}}>"MongoDB"</span><span style={{color:'#e2e8f0'}}>],</span></>,
-    <><span style={{color:'#f472b6'}}>  ecom</span><span style={{color:'#e2e8f0'}}>: [</span><span style={{color:'#34d399'}}>"Etsy"</span><span style={{color:'#e2e8f0'}}>, </span><span style={{color:'#34d399'}}>"eBay"</span><span style={{color:'#e2e8f0'}}>, </span><span style={{color:'#34d399'}}>"POD"</span><span style={{color:'#e2e8f0'}}>],</span></>,
-    <><span style={{color:'#f472b6'}}>  openToWork</span><span style={{color:'#e2e8f0'}}>: </span><span style={{color:'#fb923c'}}>true</span><span style={{color:'#e2e8f0'}}>,</span></>,
-    <><span style={{color:'#e2e8f0'}}>{'}'}</span><span style={{color:'#c084fc'}}>;</span></>,
-  ];
-
   return (
     <>
       <style>{`
-        #home.hero-section {
-          position: relative;
+        .hero-section {
+          padding-top: 140px;
           min-height: 100vh;
-          width: 100%;
-          max-width: 100% !important;
-          margin: 0 !important;
-          padding: 0 !important;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          position: relative;
           overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
         }
-        .hero-bg {
-          position: absolute; inset: 0;
-          background-image: linear-gradient(rgba(3,0,20,0.93), rgba(3,0,20,0.97)), url(${bgImage});
-          background-size: cover; background-position: center; background-attachment: fixed;
-          z-index: 0;
-        }
-        .hero-canvas { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-        .hero-glow-l {
-          position: absolute; width: 700px; height: 700px;
-          background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 65%);
-          top: -200px; left: -200px; z-index: 1; pointer-events: none;
-        }
-        .hero-glow-r {
-          position: absolute; width: 600px; height: 600px;
-          background: radial-gradient(circle, rgba(217,70,239,0.14) 0%, transparent 65%);
-          bottom: -150px; right: -150px; z-index: 1; pointer-events: none;
-        }
-
-        /* Main wrapper — full width */
-        .hero-wrap {
-          position: relative; z-index: 2;
-          width: 100%; max-width: 1300px;
-          margin: 0 auto;
-          padding: 130px 60px 60px;
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
-
-        /* Two-column grid */
-        .hero-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 64px;
-          align-items: center;
+        
+        .hero-container {
+          max-width: 1200px;
           width: 100%;
+          margin: 0 auto;
+          padding: 0 40px;
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 60px;
+          align-items: center;
+          flex-grow: 1;
         }
 
-        /* LEFT */
-        .hero-left {}
-        .hero-badge {
-          display: inline-flex; align-items: center; gap: 8px;
-          background: rgba(99,102,241,0.08);
-          border: 1px solid rgba(99,102,241,0.2);
-          border-radius: 100px;
-          padding: 7px 18px;
-          font-size: 0.78rem; font-weight: 700;
-          color: #818cf8; letter-spacing: 0.06em; text-transform: uppercase;
-          margin-bottom: 30px;
+        .hero-left {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
         }
+
+        .hero-hello {
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 800;
+          color: white;
+          line-height: 1.1;
+          margin-bottom: 8px;
+        }
+
+        .hero-hello span {
+          color: #ff5e43;
+        }
+
+        .hero-name-row {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-bottom: 8px;
+        }
+
+        .hero-dash {
+          width: 50px;
+          height: 2px;
+          background-color: #ff5e43;
+        }
+
         .hero-name {
           font-family: 'Outfit', sans-serif;
-          font-size: clamp(3rem, 5.5vw, 5rem);
-          font-weight: 800; line-height: 1.08;
-          letter-spacing: -0.04em;
-          color: white; margin: 0 0 14px;
+          font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+          font-weight: 500;
+          color: white;
         }
-        .hero-typed-row {
-          display: flex; align-items: center; gap: 10px;
-          margin-bottom: 30px; min-height: 48px;
-        }
-        .hero-typed-text {
+
+        .hero-title {
           font-family: 'Outfit', sans-serif;
-          font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-          font-weight: 600; color: #818cf8;
+          font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+          font-weight: 800;
+          color: white;
+          margin-bottom: 8px;
+          letter-spacing: -0.02em;
         }
-        .hero-cursor {
-          display: inline-block; width: 3px; height: 1.3em;
-          background: #818cf8; border-radius: 2px;
-          animation: cursorBlink 1s step-end infinite;
-          flex-shrink: 0; vertical-align: text-bottom;
+
+        .hero-subtitle {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+          font-weight: 500;
+          color: #ff5e43;
+          margin-bottom: 24px;
+          letter-spacing: 0.05em;
         }
-        @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
         .hero-desc {
-          font-size: 1.05rem; color: rgba(156,163,175,0.88);
-          line-height: 1.8; margin-bottom: 36px; max-width: 540px;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 1rem;
+          color: #94a3b8;
+          line-height: 1.6;
+          margin-bottom: 40px;
+          max-width: 95%;
         }
-        .hero-btns {
-          display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px;
-        }
-        .h-btn-p {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 14px 28px; border-radius: 12px;
-          background: linear-gradient(135deg, #6366f1, #8b5cf6);
-          color: white; font-weight: 600; font-size: 0.95rem;
-          text-decoration: none; font-family: 'Outfit', sans-serif;
-          box-shadow: 0 4px 24px rgba(99,102,241,0.4);
-          transition: filter .2s, transform .2s;
-        }
-        .h-btn-p:hover { filter: brightness(1.1); transform: translateY(-2px); }
-        .h-btn-s {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 14px 28px; border-radius: 12px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: white; font-weight: 600; font-size: 0.95rem;
-          text-decoration: none; font-family: 'Outfit', sans-serif;
-          transition: background .2s, border-color .2s, transform .2s;
-        }
-        .h-btn-s:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
 
-        .hero-socials { display: flex; align-items: center; gap: 12px; }
-        .h-social {
-          display: flex; align-items: center; justify-content: center;
-          width: 42px; height: 42px; border-radius: 10px;
-          border: 1px solid rgba(255,255,255,0.08);
-          background: rgba(255,255,255,0.03);
-          color: rgba(156,163,175,0.8); text-decoration: none;
-          transition: color .2s, background .2s, border-color .2s, transform .2s;
+        .hero-buttons {
+          display: flex;
+          gap: 16px;
         }
-        .h-social:hover { color: white; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
-        .h-divider { width: 1px; height: 22px; background: rgba(255,255,255,0.1); }
-        .h-social-txt { font-size: 0.8rem; color: rgba(156,163,175,0.55); }
 
-        /* RIGHT — code card */
         .hero-right {
-          display: flex; justify-content: center; align-items: center;
-        }
-        .hero-code-card {
-          width: 100%; max-width: 480px;
-          background: rgba(8,6,28,0.85);
-          border: 1px solid rgba(255,255,255,0.08);
-          border-radius: 20px; overflow: hidden;
-          box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.1);
-        }
-        .hero-code-head {
-          background: rgba(99,102,241,0.08);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
-          padding: 14px 18px; display: flex; align-items: center; gap: 8px;
-        }
-        .c-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .hero-code-body { padding: 22px 22px 22px; }
-        .code-ln {
-          display: flex; align-items: center; gap: 12px;
-          font-family: 'Courier New', 'Fira Code', monospace;
-          font-size: 0.82rem; margin-bottom: 9px; line-height: 1.4;
-        }
-        .ln-num { color: rgba(156,163,175,0.25); min-width: 14px; font-size: 0.72rem; user-select: none; }
-        .code-status {
-          margin-top: 16px; padding: 12px 14px;
-          background: rgba(52,211,153,0.06);
-          border: 1px solid rgba(52,211,153,0.15);
-          border-radius: 10px;
-          display: flex; align-items: center; gap: 8px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
         }
 
-        /* Stats row */
-        .hero-stats {
-          display: flex; flex-wrap: wrap; gap: 16px;
-          margin-top: 56px; width: 100%;
+        /* Avatar styling matching mockup 2 (with 3D popout cutout) */
+        .avatar-container {
+          position: relative;
+          width: 380px;
+          height: 420px;
+          display: flex;
+          align-items: flex-end; /* Align the bottom of cutout portrait to container bottom */
+          justify-content: center;
         }
 
-        /* ── RESPONSIVE ── */
+        .avatar-glow {
+          position: absolute;
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle, rgba(255, 58, 85, 0.12) 0%, transparent 70%);
+          z-index: 0;
+          pointer-events: none;
+          bottom: 40px;
+        }
+
+        /* Offset solid crimson circle */
+        .avatar-bg-circle-red {
+          position: absolute;
+          width: 250px;
+          height: 250px;
+          background-color: #e12c43; /* Crimson red */
+          border-radius: 50%;
+          left: 20px;
+          bottom: 70px;
+          z-index: 1;
+        }
+
+        /* Offset dark purple circle */
+        .avatar-bg-circle-purple {
+          position: absolute;
+          width: 290px;
+          height: 290px;
+          background-color: #1b0e1b;
+          border: 1px solid rgba(255, 58, 85, 0.08);
+          border-radius: 50%;
+          right: 20px;
+          top: 30px;
+          z-index: 0;
+        }
+
+        /* Dashed circle border */
+        .avatar-bg-circle-dashed {
+          position: absolute;
+          width: 330px;
+          height: 330px;
+          border: 1px dashed rgba(255, 58, 85, 0.25);
+          border-radius: 50%;
+          z-index: 0;
+          top: 40px;
+          left: 30px;
+        }
+
+        /* Floating geometric shapes */
+        .floating-shape-dot {
+          position: absolute;
+          border-radius: 50%;
+          z-index: 3;
+        }
+
+        .floating-shape-triangle {
+          position: absolute;
+          width: 0;
+          height: 0;
+          z-index: 3;
+        }
+
+        .triangle-up {
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-bottom: 9px solid white;
+        }
+
+        .triangle-down {
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 9px solid #e12c43;
+        }
+
+        /* Transparent Developer image container overlaying circles */
+        .avatar-img-box {
+          position: absolute;
+          width: 320px;
+          height: 380px;
+          bottom: 0;
+          z-index: 4; /* Sits on top of background circles and floaters */
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          overflow: visible; /* Let the scaled head stand out upward */
+        }
+
+        .avatar-img {
+          width: auto;
+          height: 100%;
+          object-fit: contain;
+          z-index: 5;
+          transform: scale(1.0); /* Reduced scale to fit the image properly */
+          transform-origin: bottom center; /* Anchor scaling to the bottom */
+          filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.65)); /* Premium 3D drop-shadow */
+          /* Smooth fade-out at the bottom to seamlessly hide straight crops */
+          mask-image: linear-gradient(to top, transparent 0%, black 15%, black 100%);
+          -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%, black 100%);
+        }
+
+        /* Vertical social sidebar */
+        .hero-social-sidebar {
+          position: absolute;
+          right: -80px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          z-index: 10;
+        }
+
+        .sidebar-text {
+          writing-mode: vertical-lr;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #e12c43;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          transform: rotate(180deg);
+          margin-bottom: 4px;
+        }
+
+        .sidebar-line {
+          width: 1px;
+          height: 50px;
+          background: linear-gradient(to bottom, #e12c43, transparent);
+          margin-bottom: 4px;
+        }
+
+        .sidebar-icon {
+          color: #e12c43;
+          transition: transform 0.2s, color 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .sidebar-icon:hover {
+          color: white;
+          transform: scale(1.15);
+        }
+
+        /* Bottom Skills Bar */
+        .skills-bar {
+          width: 100%;
+          background: #111723;
+          border-top: 1px solid rgba(255, 255, 255, 0.04);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          padding: 26px 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 56px;
+          margin-top: 60px;
+        }
+
+        .skill-item {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: rgba(148, 163, 184, 0.5);
+          transition: color 0.2s;
+          cursor: default;
+          letter-spacing: 0.02em;
+        }
+
+        .skill-item:hover {
+          color: white;
+        }
+
         @media (max-width: 1024px) {
-          .hero-wrap { padding: 120px 40px 60px; }
-          .hero-grid { gap: 48px; }
+          .hero-social-sidebar {
+            right: -40px;
+          }
         }
-        @media (max-width: 860px) {
-          .hero-wrap { padding: 110px 28px 50px; }
-          .hero-grid {
+
+        @media (max-width: 900px) {
+          .hero-container {
             grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: center;
+            padding-top: 20px;
+          }
+          .hero-left {
+            align-items: center;
+            order: 2;
+          }
+          .hero-right {
+            order: 1;
+            margin-bottom: 20px;
+          }
+          .hero-name-row {
+            justify-content: center;
+          }
+          .skills-bar {
+            margin-top: 40px;
+            gap: 32px;
+            flex-wrap: wrap;
+            padding: 20px;
+          }
+          .hero-social-sidebar {
+            position: relative;
+            right: 0;
+            top: 0;
+            transform: none;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 28px;
+            gap: 20px;
+          }
+          .sidebar-text {
+            writing-mode: horizontal-tb;
+            transform: none;
+            margin-bottom: 0;
+          }
+          .sidebar-line {
+            width: 30px;
+            height: 1px;
+            background: #e12c43;
+            margin-bottom: 0;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .hero-section {
+            padding-top: 100px;
+          }
+          .hero-buttons {
+            flex-direction: column;
+            width: 100%;
+          }
+          .hero-buttons .btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .skills-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            justify-content: center;
             text-align: center;
           }
-          .hero-right { order: -1; }
-          .hero-code-card { max-width: 420px; margin: 0 auto; }
-          .hero-desc { margin-left: auto; margin-right: auto; }
-          .hero-btns { justify-content: center; }
-          .hero-socials { justify-content: center; }
-          .hero-badge { margin-left: auto; margin-right: auto; }
-          .hero-typed-row { justify-content: center; }
-          .hero-stats { justify-content: center; }
         }
-        @media (max-width: 540px) {
-          .hero-wrap { padding: 95px 16px 40px; }
-          .hero-name { font-size: 2.6rem; }
-          .hero-code-card { display: none; }
-          .hero-btns { flex-direction: column; align-items: center; }
-          .h-btn-p, .h-btn-s { width: 100%; justify-content: center; }
-          .hero-stats { gap: 12px; }
+
+        @media (max-width: 480px) {
+          .skills-bar {
+            grid-template-columns: repeat(3, 1fr);
+          }
         }
       `}</style>
 
       <section id="home" className="hero-section">
-        <div className="hero-bg" />
-        <canvas ref={canvasRef} className="hero-canvas" />
-        <div className="hero-glow-l" />
-        <div className="hero-glow-r" />
+        <div className="hero-container">
+          <motion.div 
+            className="hero-left"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 className="hero-hello">Hello<span>.</span></h1>
+            
+            <div className="hero-name-row">
+              <div className="hero-dash" />
+              <span className="hero-name">I'm Hariharan</span>
+            </div>
+            
+            <h2 className="hero-title">Founder & Lead Dev<span style={{ fontSize: '0.5em', color: '#94a3b8', fontWeight: 500, verticalAlign: 'middle', marginLeft: '10px' }}>at Skyrovix</span></h2>
+            
+            <div className="hero-subtitle">FULL STACK DEVELOPER | AI DEVELOPER | SOFTWARE ENGINEER</div>
+            
+            <p className="hero-desc">
+              I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities.
+            </p>
+            
+            <div className="hero-buttons">
+              <a href="#contact" className="btn btn-primary">Get a project!</a>
+              <a href={`${import.meta.env.BASE_URL}Hariharan-CV.html`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">View / Download CV</a>
+            </div>
+          </motion.div>
 
-        <div className="hero-wrap">
-          {/* TOP: two-column grid */}
-          <div className="hero-grid">
-
-            {/* LEFT */}
-            <motion.div
-              className="hero-left"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="hero-badge">
-                <Sparkles size={13} />
-                Available for freelance projects
+          <motion.div 
+            className="hero-right"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="avatar-container">
+              <motion.div 
+                className="avatar-glow" 
+                animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              />
+              
+              {/* Concentric mockup rings */}
+              <div className="avatar-bg-circle-purple" />
+              <motion.div 
+                className="avatar-bg-circle-dashed" 
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+              />
+              <div className="avatar-bg-circle-red" />
+              
+              {/* Transparent background image sitting on top of circles, not cropped */}
+              <div className="avatar-img-box">
+                <img src={studentImg} alt="Hariharan S." className="avatar-img" />
               </div>
 
-              <h1 className="hero-name">
-                S <span className="gradient-text">Hariharan</span>
-              </h1>
+              {/* Floating shapes matching mockup */}
+              <motion.div 
+                className="floating-shape-dot" 
+                style={{ width: '12px', height: '12px', backgroundColor: '#e12c43', top: '12%', right: '25%' }}
+                animate={{ y: [0, -15, 0], x: [0, 10, 0], scale: [1, 1.1, 1] }}
+                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+              />
+              <motion.div 
+                className="floating-shape-dot" 
+                style={{ width: '6px', height: '6px', backgroundColor: 'white', bottom: '45%', left: '10%' }}
+                animate={{ y: [0, 12, 0], x: [0, -8, 0], opacity: [0.6, 1, 0.6] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
+              />
+              <motion.div 
+                className="floating-shape-triangle triangle-up" 
+                style={{ top: '28%', right: '15%' }}
+                animate={{ y: [0, -10, 0], rotate: [0, 20, 0] }}
+                transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 1 }}
+              />
+              <motion.div 
+                className="floating-shape-triangle triangle-down" 
+                style={{ bottom: '25%', right: '28%' }}
+                animate={{ y: [0, 12, 0], rotate: [0, -20, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.2 }}
+              />
+              <motion.div 
+                className="floating-shape-triangle triangle-up" 
+                style={{ top: '15%', left: '22%' }}
+                animate={{ y: [0, -8, 0], rotate: [-30, -5, -30] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
+              />
 
-              <div className="hero-typed-row">
-                <span className="hero-typed-text">{typed}</span>
-                <span className="hero-cursor" />
-              </div>
-
-              <p className="hero-desc">
-                Building premium digital experiences. Founder of{' '}
-                <span style={{ color: '#818cf8', fontWeight: 600 }}>Skyrovix Webtech</span>{' '}
-                and scaling high-growth{' '}
-                <span style={{ color: 'white', fontWeight: 600 }}>E-Commerce businesses</span>{' '}
-                across Etsy, eBay & custom print-on-demand platforms globally.
-              </p>
-
-              <div className="hero-btns">
-                <a href="#projects" className="h-btn-p">
-                  Explore My Work <ArrowRight size={16} />
-                </a>
-                <a href="https://hariharan1022.github.io/sk_web_tech/" target="_blank" rel="noopener noreferrer" className="h-btn-s">
-                  Skyrovix Agency <ExternalLink size={14} />
-                </a>
-              </div>
-
-              <div className="hero-socials">
-                <a href="https://github.com/hariharan1022" target="_blank" rel="noopener noreferrer" className="h-social" aria-label="GitHub">
+              {/* Vertical social sidebar */}
+              <div className="hero-social-sidebar">
+                <span className="sidebar-text">FOLLOW ME ON:</span>
+                <div className="sidebar-line" />
+                <a href="https://github.com/hariharan1022" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="GitHub">
                   <Github size={18} />
                 </a>
-                <a href="#contact" className="h-social" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/hariharan-s-92b566381" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="LinkedIn">
                   <Linkedin size={18} />
                 </a>
-                <div className="h-divider" />
-                <span className="h-social-txt">Open to work & collaboration</span>
+                <a href="https://wa.me/919940773204" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="WhatsApp">
+                  <MessageSquare size={18} />
+                </a>
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="Instagram">
+                  <Instagram size={18} />
+                </a>
               </div>
-            </motion.div>
-
-            {/* RIGHT — Code Card */}
-            <motion.div
-              className="hero-right"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-            >
-              <motion.div
-                className="hero-code-card"
-                animate={{ y: [0, -12, 0] }}
-                transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
-              >
-                {/* Window chrome */}
-                <div className="hero-code-head">
-                  <div className="c-dot" style={{ background: '#ff5f57' }} />
-                  <div className="c-dot" style={{ background: '#ffbd2e' }} />
-                  <div className="c-dot" style={{ background: '#28c840' }} />
-                  <span style={{ color: 'rgba(156,163,175,0.45)', fontSize: '0.78rem', marginLeft: '8px', fontFamily: 'monospace' }}>
-                    hariharan.js
-                  </span>
-                </div>
-
-                {/* Code lines */}
-                <div className="hero-code-body">
-                  {codeLines.map((line, i) => (
-                    <motion.div
-                      key={i}
-                      className="code-ln"
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 + i * 0.07 }}
-                    >
-                      <span className="ln-num">{i + 1}</span>
-                      <span>{line}</span>
-                    </motion.div>
-                  ))}
-
-                  {/* Status indicator */}
-                  <div className="code-status">
-                    <motion.div
-                      style={{ width: 8, height: 8, borderRadius: '50%', background: '#34d399', flexShrink: 0 }}
-                      animate={{ scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }}
-                      transition={{ repeat: Infinity, duration: 2 }}
-                    />
-                    <span style={{ fontSize: '0.78rem', color: '#34d399', fontFamily: 'monospace' }}>
-                      Ready to build your next project
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* STATS ROW — full width below grid */}
-          <motion.div
-            className="hero-stats"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-          >
-            <StatCard value="10+" label="Projects Completed" icon={<Code2 size={20} />} color="#818cf8" delay={0.9} />
-            <StatCard value="3+" label="Skyrovix Clients" icon={<Globe size={20} />} color="#a78bfa" delay={1.0} />
-            <StatCard value="3" label="E-Commerce Stores" icon={<ShoppingBag size={20} />} color="#f472b6" delay={1.1} />
-            <StatCard value="7+" label="Certifications Earned" icon={<Sparkles size={20} />} color="#34d399" delay={1.2} />
+            </div>
           </motion.div>
         </div>
+
+        {/* Inline skills bar matching mockup */}
+        <motion.div 
+          className="skills-bar"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          {skills.map((skill, index) => (
+            <span key={skill} className="skill-item">{skill}</span>
+          ))}
+        </motion.div>
       </section>
     </>
   );
