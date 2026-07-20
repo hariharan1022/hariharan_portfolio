@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hariharan S - CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-dark: #1a1a1a;
+            --text-gray: #666666;
+            --text-light: #999999;
+            --accent: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f0f0;
+            color: var(--text-gray);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 20mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Top left vertical line decoration */
+        .decor-line {
+            position: absolute;
+            left: 12mm;
+            top: 0;
+            height: 35mm;
+            width: 1px;
+            background-color: var(--text-dark);
+        }
+
+        /* Middle left vertical line decoration */
+        .decor-line-2 {
+            position: absolute;
+            left: 12mm;
+            top: 40mm;
+            height: 25mm;
+            width: 1px;
+            background-color: var(--text-dark);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 5mm;
+            margin-bottom: 20mm;
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .first-name {
+            font-size: 16px;
+            letter-spacing: 8px;
+            font-weight: 500;
+            color: var(--text-gray);
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .last-name {
+            font-size: 50px;
+            letter-spacing: 6px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .job-title {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 2px;
+        }
+
+        .header-right .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #f4f4f4;
+            filter: grayscale(20%) contrast(110%);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            gap: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* --- LEFT COLUMN STYLES --- */
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            font-size: 10px;
+            margin-bottom: 12px;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--text-dark);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .subsection-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            font-size: 10px;
+            margin-bottom: 10px;
+            color: var(--text-gray);
+            font-weight: 500;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .skills-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 4px;
+            height: 4px;
+            border: 1.5px solid var(--text-dark);
+            border-radius: 50%;
+        }
+
+        /* --- TIMELINE (EDUCATION/PROJECTS/EXPERIENCE) --- */
+        .timeline {
+            border-left: 1px solid var(--text-dark);
+            padding-left: 20px;
+            margin-left: 6px;
+            position: relative;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px; /* Offset to center on the border */
+            top: 2px;
+            width: 7px;
+            height: 7px;
+            border: 2px solid var(--text-dark);
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .tl-title-small {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .tl-subtitle-small {
+            font-size: 9px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .tl-desc-small {
+            font-size: 9.5px;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* --- RIGHT COLUMN STYLES --- */
+        .profile-text {
+            font-size: 10.5px;
+            color: var(--text-gray);
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .tl-header {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .tl-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .tl-date {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            letter-spacing: 2px;
+            margin-left: 8px;
+        }
+
+        .tl-subtitle {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .tl-bullets {
+            list-style: none;
+        }
+
+        .tl-bullets li {
+            font-size: 10px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .tl-bullets li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: -1px;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+            .contact-icon {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="decor-line"></div>
+    <div class="decor-line-2"></div>
+
+    <header class="header">
+        <div class="header-left">
+            <div class="first-name">RESUME</div>
+            <div class="last-name">S HARIHARAN</div>
+            <div class="job-title">Full Stack Developer | AI Developer</div>
+        </div>
+        <div class="header-right">
+            <!-- Using the avatar from the project assets -->
+            <img src="/hariharan_portfolio/src/assets/student.png" alt="Hariharan" class="profile-img">
+        </div>
+    </header>
+
+    <div class="content-grid">
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+            <div class="section">
+                <h2 class="section-title">C O N T A C T</h2>
+                <ul class="contact-list">
+                    <li>
+                        <div class="contact-icon">📍</div>
+                        Pudukkottai, India
+                    </li>
+                    <li>
+                        <div class="contact-icon">📞</div>
+                        +91 9940773204
+                    </li>
+                    <li>
+                        <div class="contact-icon">✉️</div>
+                        hariharanmahesh34@gmail.com
+                    </li>
+                    <li>
+                        <div class="contact-icon">🔗</div>
+                        github.com/hariharan1022
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">S K I L L S</h2>
+                <h3 class="subsection-title">P R O F E S S I O N A L</h3>
+                <ul class="skills-list">
+                    <li>JavaScript / TypeScript</li>
+                    <li>React.js / Next.js</li>
+                    <li>Node.js / Express</li>
+                    <li>Python / Fast API</li>
+                    <li>PostgreSQL / MongoDB</li>
+                    <li>AI Integration</li>
+                    <li>UI/UX Design</li>
+                    <li>Cloud Deployment</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">P R O J E C T S</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="tl-title-small">MASTERS CHESS ACADEMY</div>
+                        <div class="tl-subtitle-small">REACT | CSS GRID</div>
+                        <div class="tl-desc-small">Elegant, interactive e-learning platform showcasing courses and trainer registries.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-title-small">MOUNT ZION COLLEGE</div>
+                        <div class="tl-subtitle-small">REACT | FORM SYSTEMS</div>
+                        <div class="tl-desc-small">Comprehensive academic portal handling college curriculum details and admissions.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-title-small">TAMILROCKES MOVIE HUB</div>
+                        <div class="tl-subtitle-small">REACT | SEARCH ENGINE</div>
+                        <div class="tl-desc-small">High-performance movie streaming and discovery platform.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+            <div class="section">
+                <h2 class="section-title">P R O F I L E</h2>
+                <p class="profile-text">
+                    Passionate Full Stack Developer and Founder of Skyrovix, specializing in designing and developing modern, scalable, and user-centric web applications. Proven expertise in combining clean design, powerful backend architecture, and intelligent AI capabilities to build end-to-end digital solutions. Adept at turning complex problems into intuitive, high-performance products.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">E X P E R I E N C E</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="tl-header">
+                            <span class="tl-title">FOUNDER & LEAD DEVELOPER</span>
+                            <span class="tl-date">| 2026 - PRESENT</span>
+                        </div>
+                        <div class="tl-subtitle">SKYROVIX</div>
+                        <ul class="tl-bullets">
+                            <li>Founded Skyrovix with a vision to build modern, scalable, and AI-powered software solutions.</li>
+                            <li>Lead the design, development, and deployment of web applications, focusing on innovation and performance.</li>
+                            <li>Responsible for product architecture, full-stack development, UI/UX design, cloud deployment, and technical strategy.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-header">
+                            <span class="tl-title">FULL STACK DEVELOPER</span>
+                            <span class="tl-date">| 2024 - 2026</span>
+                        </div>
+                        <div class="tl-subtitle">INDEPENDENT DEVELOPMENT</div>
+                        <ul class="tl-bullets">
+                            <li>Mastered modern web development by building real-world projects using React, Next.js, TypeScript, Node.js, and Python.</li>
+                            <li>Developed portfolio websites, management systems, and AI-integrated applications.</li>
+                            <li>Strengthened software architecture and problem-solving skills through hands-on implementation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">C E R T I F I C A T I O N S</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="tl-header">
+                            <span class="tl-title">SOFTWARE DEVELOPMENT INTERN</span>
+                            <span class="tl-date">| 2026</span>
+                        </div>
+                        <div class="tl-subtitle">SKYROVIX & THIRANEX</div>
+                        <ul class="tl-bullets">
+                            <li>Completed rigorous software development internships focusing on scalable architecture and enterprise deployment.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-header">
+                            <span class="tl-title">PROFESSIONAL CREDENTIALS</span>
+                            <span class="tl-date">| 2024 - 2025</span>
+                        </div>
+                        <div class="tl-subtitle">GUVI | INFOSYS | MONGODB</div>
+                        <ul class="tl-bullets">
+                            <li>Generative AI, Ethical Hacking, Git & GitHub (Guvi)</li>
+                            <li>JavaScript Certification (Infosys Springboard)</li>
+                            <li>MongoDB Basics (MongoDB)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
