@@ -25,7 +25,9 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
+      - env:
+          BASE_PATH: /hariharan_portfolio/
+        run: npm run build
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
