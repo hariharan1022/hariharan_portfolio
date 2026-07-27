@@ -405,7 +405,7 @@ const Hero = () => {
             
             <div className="hero-buttons">
               <a href="#contact" className="btn btn-primary">Get a project!</a>
-              <a href={`${import.meta.env.BASE_URL}Hariharan-CV.html`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">View / Download CV</a>
+              <a href={`${import.meta.env.BASE_URL}Hariharan-CV.pdf`} download className="btn btn-secondary">Download CV (PDF)</a>
             </div>
           </motion.div>
 

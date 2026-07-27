@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Globe, Sparkles } from 'lucide-react';
 import tamilrockesPng from '../assets/tamilrockes.png';
-import aiChatBotPng from '../assets/ai chat bot.png';
 import spotifyPng from '../assets/spotify.png';
 import skyrovixInternshipPng from '../assets/skyrovix internship.png';
 import skyrovixWebTechPng from '../assets/skyrovix web tech.png';
@@ -142,14 +141,6 @@ const Projects = () => {
       image: tamilrockesPng,
       github: 'https://github.com/hariharan1022/tamilrockes',
       live: 'https://hariharan1022.github.io/tamilrockes/tamilrocker.html',
-    },
-    {
-      title: 'AI Public Health Chatbot',
-      description: 'An AI-powered chatbot designed for disease awareness and health education using modern natural language processing models.',
-      tags: ['AI', 'React', 'Python', 'Public Health'],
-      image: aiChatBotPng,
-      github: 'https://github.com/hariharan1022/Al-Driven-Public-Health-Chatbot-for-Disease-Awareness',
-      live: 'https://hariharan1022.github.io/Al-Driven-Public-Health-Chatbot-for-Disease-Awareness/',
     },
     {
       title: 'Spotify Cloud Clone',
