@@ -83,14 +83,14 @@ const Navbar = () => {
         .nav-overlay {
           position: fixed; inset: 0;
           background: rgba(11,15,23,0.9);
-          backdrop-filter: blur(8px); z-index: 998;
+          backdrop-filter: blur(8px); z-index: 1001;
         }
         .nav-drawer {
           position: fixed; top: 0; right: 0; height: 100%;
           width: min(320px, 85vw);
           background: #0d121a;
           border-left: 1px solid rgba(255,255,255,0.06);
-          z-index: 999; display: flex; flex-direction: column; overflow: hidden;
+          z-index: 1002; display: flex; flex-direction: column; overflow: hidden;
         }
         .nav-drawer-header {
           display: flex; align-items: center; justify-content: space-between;
