@@ -87,6 +87,14 @@ const Hero = () => {
           letter-spacing: -0.02em;
         }
 
+        .hero-title-at {
+          font-size: 0.5em;
+          color: #94a3b8;
+          font-weight: 500;
+          vertical-align: middle;
+          margin-left: 10px;
+        }
+
         .hero-subtitle {
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: clamp(0.9rem, 1.5vw, 1.1rem);
@@ -119,9 +127,24 @@ const Hero = () => {
 
         /* Avatar styling matching mockup 2 (with 3D popout cutout) */
         .avatar-container {
+          --avatar-w: 380px;
+          --avatar-h: 420px;
+          --avatar-glow-size: 400px;
+          --circle-red-size: 250px;
+          --circle-red-left: 20px;
+          --circle-red-bottom: 70px;
+          --circle-purple-size: 290px;
+          --circle-purple-right: 20px;
+          --circle-purple-top: 30px;
+          --circle-dashed-size: 330px;
+          --circle-dashed-top: 40px;
+          --circle-dashed-left: 30px;
+          --img-box-w: 320px;
+          --img-box-h: 380px;
+
           position: relative;
-          width: 380px;
-          height: 420px;
+          width: var(--avatar-w);
+          height: var(--avatar-h);
           display: flex;
           align-items: flex-end; /* Align the bottom of cutout portrait to container bottom */
           justify-content: center;
@@ -129,8 +152,8 @@ const Hero = () => {
 
         .avatar-glow {
           position: absolute;
-          width: 400px;
-          height: 400px;
+          width: var(--avatar-glow-size);
+          height: var(--avatar-glow-size);
           background: radial-gradient(circle, rgba(255, 58, 85, 0.12) 0%, transparent 70%);
           z-index: 0;
           pointer-events: none;
@@ -140,38 +163,38 @@ const Hero = () => {
         /* Offset solid crimson circle */
         .avatar-bg-circle-red {
           position: absolute;
-          width: 250px;
-          height: 250px;
+          width: var(--circle-red-size);
+          height: var(--circle-red-size);
           background-color: #e12c43; /* Crimson red */
           border-radius: 50%;
-          left: 20px;
-          bottom: 70px;
+          left: var(--circle-red-left);
+          bottom: var(--circle-red-bottom);
           z-index: 1;
         }
 
         /* Offset dark purple circle */
         .avatar-bg-circle-purple {
           position: absolute;
-          width: 290px;
-          height: 290px;
+          width: var(--circle-purple-size);
+          height: var(--circle-purple-size);
           background-color: #1b0e1b;
           border: 1px solid rgba(255, 58, 85, 0.08);
           border-radius: 50%;
-          right: 20px;
-          top: 30px;
+          right: var(--circle-purple-right);
+          top: var(--circle-purple-top);
           z-index: 0;
         }
 
         /* Dashed circle border */
         .avatar-bg-circle-dashed {
           position: absolute;
-          width: 330px;
-          height: 330px;
+          width: var(--circle-dashed-size);
+          height: var(--circle-dashed-size);
           border: 1px dashed rgba(255, 58, 85, 0.25);
           border-radius: 50%;
           z-index: 0;
-          top: 40px;
-          left: 30px;
+          top: var(--circle-dashed-top);
+          left: var(--circle-dashed-left);
         }
 
         /* Floating geometric shapes */
@@ -203,8 +226,8 @@ const Hero = () => {
         /* Transparent Developer image container overlaying circles */
         .avatar-img-box {
           position: absolute;
-          width: 320px;
-          height: 380px;
+          width: var(--img-box-w);
+          height: var(--img-box-h);
           bottom: 0;
           z-index: 4; /* Sits on top of background circles and floaters */
           display: flex;
@@ -319,15 +342,19 @@ const Hero = () => {
           .hero-right {
             order: 1;
             margin-bottom: 20px;
+            flex-direction: column;
+            gap: 16px;
           }
           .hero-name-row {
             justify-content: center;
           }
           .skills-bar {
             margin-top: 40px;
-            gap: 32px;
-            flex-wrap: wrap;
             padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 24px;
           }
           .hero-social-sidebar {
             position: relative;
@@ -336,7 +363,7 @@ const Hero = () => {
             transform: none;
             flex-direction: row;
             justify-content: center;
-            margin-top: 28px;
+            margin-top: 10px;
             gap: 20px;
           }
           .sidebar-text {
@@ -356,26 +383,56 @@ const Hero = () => {
           .hero-section {
             padding-top: 100px;
           }
+          .hero-title-at {
+            display: block;
+            margin-left: 0;
+            margin-top: 4px;
+            font-size: 0.55em;
+          }
+          .hero-subtitle {
+            font-size: 0.8rem;
+            line-height: 1.4;
+            letter-spacing: 0.03em;
+            margin-bottom: 16px;
+          }
           .hero-buttons {
             flex-direction: column;
             width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
           }
           .hero-buttons .btn {
             width: 100%;
             justify-content: center;
           }
-          .skills-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            justify-content: center;
-            text-align: center;
-          }
         }
 
         @media (max-width: 480px) {
+          .avatar-container {
+            --avatar-w: 280px;
+            --avatar-h: 310px;
+            --avatar-glow-size: 290px;
+            --circle-red-size: 180px;
+            --circle-red-left: 15px;
+            --circle-red-bottom: 50px;
+            --circle-purple-size: 215px;
+            --circle-purple-right: 15px;
+            --circle-purple-top: 20px;
+            --circle-dashed-size: 245px;
+            --circle-dashed-top: 30px;
+            --circle-dashed-left: 20px;
+            --img-box-w: 235px;
+            --img-box-h: 280px;
+          }
+          .sidebar-text,
+          .sidebar-line {
+            display: none;
+          }
           .skills-bar {
-            grid-template-columns: repeat(3, 1fr);
+            gap: 12px 18px;
+          }
+          .skill-item {
+            font-size: 0.85rem;
           }
         }
       `}</style>
@@ -395,7 +452,7 @@ const Hero = () => {
               <span className="hero-name">I'm Hariharan</span>
             </div>
             
-            <h2 className="hero-title">Founder & Lead Dev<span style={{ fontSize: '0.5em', color: '#94a3b8', fontWeight: 500, verticalAlign: 'middle', marginLeft: '10px' }}>at Skyrovix</span></h2>
+            <h2 className="hero-title">Founder & Lead Dev<span className="hero-title-at">at Skyrovix</span></h2>
             
             <div className="hero-subtitle">FULL STACK DEVELOPER | AI DEVELOPER | SOFTWARE ENGINEER</div>
             

@@ -179,6 +179,9 @@ const Experience = () => {
             border-width: 15px 15px 15px 0;
             border-color: transparent rgba(255, 255, 255, 0.02) transparent transparent;
           }
+          .timeline-spacer {
+            display: none;
+          }
         }
       `}</style>
 
