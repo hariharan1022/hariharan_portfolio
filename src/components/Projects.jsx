@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Github, Globe, Sparkles } from 'lucide-react';
 import tamilrockesPng from '../assets/tamilrockes.png';
 import spotifyPng from '../assets/spotify.png';
-import skyrovixInternshipPng from '../assets/skyrovix internship.png';
+import skyrovixInternshipPng from '../assets/skyrovix internship and learning platform.png';
 import skyrovixWebTechPng from '../assets/skyrovix web tech.png';
+import mzcetReportPng from '../assets/mzcet-weekly report automatio n.png';
 import chessPng from '../assets/chess.png';
 import nursingPng from '../assets/nursing.png';
 
@@ -71,31 +72,41 @@ const ProjectCard = ({ title, description, tags, image, github, live, isAgency, 
       <div className="project-content">
         <div>
           <h3 className="project-title">{title}</h3>
+          <p className="project-desc">{description}</p>
+          {tags && tags.length > 0 && (
+            <div className="project-tags">
+              {tags.map((tag, i) => (
+                <span key={i} className="project-tag">{tag}</span>
+              ))}
+            </div>
+          )}
         </div>
         
         <div style={{ marginTop: 'auto' }}>
-          <div className="project-actions">
-            {live && (
-              <motion.a
-                href={live} target="_blank" rel="noopener noreferrer"
-                className="project-btn primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Launch App <ExternalLink size={14} />
-              </motion.a>
-            )}
-            {github && (
-              <motion.a
-                href={github} target="_blank" rel="noopener noreferrer"
-                className="project-btn secondary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Github size={14} /> Source
-              </motion.a>
-            )}
-          </div>
+          {(live || github) && (
+            <div className="project-actions">
+              {live && (
+                <motion.a
+                  href={live} target="_blank" rel="noopener noreferrer"
+                  className="project-btn primary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Launch App <ExternalLink size={14} />
+                </motion.a>
+              )}
+              {github && (
+                <motion.a
+                  href={github} target="_blank" rel="noopener noreferrer"
+                  className="project-btn secondary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Github size={14} /> Source
+                </motion.a>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
@@ -105,7 +116,7 @@ const ProjectCard = ({ title, description, tags, image, github, live, isAgency, 
 const Projects = () => {
   const projects = [
     {
-      title: 'Skyrovix Internship',
+      title: 'Skyrovix Internship & Learning Platform',
       description: 'A comprehensive internship and training platform equipping students with industry-relevant skills in full-stack development, AI, and cloud technologies.',
       tags: ['Internship', 'Training', 'Mentorship', 'EdTech'],
       image: skyrovixInternshipPng,
@@ -119,6 +130,14 @@ const Projects = () => {
       image: skyrovixWebTechPng,
       live: 'https://hariharan1022.github.io/skyrovix_tech/',
       isAgency: true,
+    },
+    {
+      title: 'Mount Zion Weekly & Monthly Report Automation',
+      description: 'An automated reporting system built for Mount Zion College of Engineering and Technology (MZCET) to streamline weekly and monthly academic data processing, analytics, and report generation.',
+      tags: ['React', 'Automation', 'Report Engine', 'Academic Portal'],
+      image: mzcetReportPng,
+      github: 'https://github.com/hariharan1022/MZCET-WEEKLY-REPORT-AUTOMATION',
+      live: 'https://hariharan1022.github.io/MZCET-WEEKLY-REPORT-AUTOMATION/',
     },
     {
       title: 'Masters Chess Academy',
