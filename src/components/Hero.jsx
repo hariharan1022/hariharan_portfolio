@@ -358,21 +358,36 @@ const Hero = () => {
             align-items: center;
           }
           .hero-hello {
-            font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+            font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+            margin-bottom: 4px;
+          }
+          .hero-dash {
+            width: 24px;
+          }
+          .hero-name {
+            font-size: clamp(0.82rem, 2.5vw, 1.05rem);
+          }
+          .hero-name-row {
+            gap: 8px;
+            margin-bottom: 4px;
           }
           .hero-title {
-            font-size: clamp(1.25rem, 4vw, 2rem);
+            font-size: clamp(1.1rem, 3.4vw, 1.6rem);
+            line-height: 1.2;
+            margin-bottom: 4px;
           }
           .hero-title-at {
             display: block;
             margin-left: 0;
             font-size: 0.55em;
-            margin-top: 2px;
+            margin-top: 1px;
+            color: #94a3b8;
           }
           .hero-subtitle {
-            font-size: clamp(0.65rem, 2.2vw, 0.85rem);
-            letter-spacing: 0.03em;
-            margin: 0 0 12px 0;
+            font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+            letter-spacing: 0.02em;
+            margin: 0 0 8px 0;
+            line-height: 1.35;
           }
           .hero-social-sidebar {
             display: none !important;
@@ -480,44 +495,51 @@ const Hero = () => {
             gap: 8px;
           }
           .avatar-container {
-            --avatar-w: 150px;
-            --avatar-h: 180px;
-            --avatar-glow-size: 150px;
-            --circle-red-size: 100px;
+            --avatar-w: 145px;
+            --avatar-h: 175px;
+            --avatar-glow-size: 145px;
+            --circle-red-size: 95px;
             --circle-red-left: 8px;
-            --circle-red-bottom: 25px;
-            --circle-purple-size: 120px;
+            --circle-red-bottom: 22px;
+            --circle-purple-size: 115px;
             --circle-purple-right: 6px;
             --circle-purple-top: 10px;
-            --circle-dashed-size: 135px;
+            --circle-dashed-size: 130px;
             --circle-dashed-top: 12px;
             --circle-dashed-left: 6px;
-            --img-box-w: 130px;
-            --img-box-h: 165px;
+            --img-box-w: 125px;
+            --img-box-h: 160px;
           }
           .hero-hello {
-            font-size: 1.65rem;
+            font-size: 1.4rem;
+            margin-bottom: 2px;
           }
           .hero-dash {
-            width: 16px;
+            width: 14px;
           }
           .hero-name {
-            font-size: 0.88rem;
+            font-size: 0.78rem;
+          }
+          .hero-name-row {
+            gap: 6px;
+            margin-bottom: 2px;
           }
           .hero-title {
-            font-size: 1.15rem;
+            font-size: 1.02rem;
+            line-height: 1.2;
+            margin-bottom: 2px;
           }
           .hero-subtitle {
-            font-size: 0.58rem;
-            line-height: 1.35;
+            font-size: 0.5rem;
+            line-height: 1.3;
           }
           .hero-section-2-mobile {
-            margin-top: 20px;
+            margin-top: 18px;
           }
           .hero-section-2-mobile .hero-desc {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             line-height: 1.5;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
           }
           .hero-section-2-mobile .hero-buttons {
             flex-direction: column;
@@ -527,23 +549,23 @@ const Hero = () => {
           .hero-section-2-mobile .hero-buttons .btn {
             width: 100%;
             justify-content: center;
-            padding: 9px 12px;
-            font-size: 0.78rem;
+            padding: 8px 10px;
+            font-size: 0.75rem;
           }
           .hero-social-btn {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
           }
           .skills-bar-wrapper {
             padding: 16px 0;
-            margin-top: 24px;
+            margin-top: 20px;
           }
           .skills-bar-content {
             padding: 0 12px;
-            gap: 10px 16px;
+            gap: 8px 14px;
           }
           .skill-item {
-            font-size: 0.82rem;
+            font-size: 0.78rem;
           }
         }
       `}</style>
