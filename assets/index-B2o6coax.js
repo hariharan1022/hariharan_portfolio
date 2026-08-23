@@ -430,21 +430,36 @@ Error generating stack: `+a.message+`
             align-items: center;
           }
           .hero-hello {
-            font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+            font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+            margin-bottom: 4px;
+          }
+          .hero-dash {
+            width: 24px;
+          }
+          .hero-name {
+            font-size: clamp(0.82rem, 2.5vw, 1.05rem);
+          }
+          .hero-name-row {
+            gap: 8px;
+            margin-bottom: 4px;
           }
           .hero-title {
-            font-size: clamp(1.25rem, 4vw, 2rem);
+            font-size: clamp(1.1rem, 3.4vw, 1.6rem);
+            line-height: 1.2;
+            margin-bottom: 4px;
           }
           .hero-title-at {
             display: block;
             margin-left: 0;
             font-size: 0.55em;
-            margin-top: 2px;
+            margin-top: 1px;
+            color: #94a3b8;
           }
           .hero-subtitle {
-            font-size: clamp(0.65rem, 2.2vw, 0.85rem);
-            letter-spacing: 0.03em;
-            margin: 0 0 12px 0;
+            font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+            letter-spacing: 0.02em;
+            margin: 0 0 8px 0;
+            line-height: 1.35;
           }
           .hero-social-sidebar {
             display: none !important;
@@ -552,44 +567,51 @@ Error generating stack: `+a.message+`
             gap: 8px;
           }
           .avatar-container {
-            --avatar-w: 150px;
-            --avatar-h: 180px;
-            --avatar-glow-size: 150px;
-            --circle-red-size: 100px;
+            --avatar-w: 145px;
+            --avatar-h: 175px;
+            --avatar-glow-size: 145px;
+            --circle-red-size: 95px;
             --circle-red-left: 8px;
-            --circle-red-bottom: 25px;
-            --circle-purple-size: 120px;
+            --circle-red-bottom: 22px;
+            --circle-purple-size: 115px;
             --circle-purple-right: 6px;
             --circle-purple-top: 10px;
-            --circle-dashed-size: 135px;
+            --circle-dashed-size: 130px;
             --circle-dashed-top: 12px;
             --circle-dashed-left: 6px;
-            --img-box-w: 130px;
-            --img-box-h: 165px;
+            --img-box-w: 125px;
+            --img-box-h: 160px;
           }
           .hero-hello {
-            font-size: 1.65rem;
+            font-size: 1.4rem;
+            margin-bottom: 2px;
           }
           .hero-dash {
-            width: 16px;
+            width: 14px;
           }
           .hero-name {
-            font-size: 0.88rem;
+            font-size: 0.78rem;
+          }
+          .hero-name-row {
+            gap: 6px;
+            margin-bottom: 2px;
           }
           .hero-title {
-            font-size: 1.15rem;
+            font-size: 1.02rem;
+            line-height: 1.2;
+            margin-bottom: 2px;
           }
           .hero-subtitle {
-            font-size: 0.58rem;
-            line-height: 1.35;
+            font-size: 0.5rem;
+            line-height: 1.3;
           }
           .hero-section-2-mobile {
-            margin-top: 20px;
+            margin-top: 18px;
           }
           .hero-section-2-mobile .hero-desc {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             line-height: 1.5;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
           }
           .hero-section-2-mobile .hero-buttons {
             flex-direction: column;
@@ -599,23 +621,23 @@ Error generating stack: `+a.message+`
           .hero-section-2-mobile .hero-buttons .btn {
             width: 100%;
             justify-content: center;
-            padding: 9px 12px;
-            font-size: 0.78rem;
+            padding: 8px 10px;
+            font-size: 0.75rem;
           }
           .hero-social-btn {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
           }
           .skills-bar-wrapper {
             padding: 16px 0;
-            margin-top: 24px;
+            margin-top: 20px;
           }
           .skills-bar-content {
             padding: 0 12px;
-            gap: 10px 16px;
+            gap: 8px 14px;
           }
           .skill-item {
-            font-size: 0.82rem;
+            font-size: 0.78rem;
           }
         }
       `}),v.jsxs("section",{id:"home",className:"hero-section",children:[v.jsxs("div",{className:"hero-container",children:[v.jsxs("div",{className:"hero-top-grid",children:[v.jsxs(nt.div,{className:"hero-left",initial:{opacity:0,y:30},animate:{opacity:1,y:0},transition:{duration:.7,ease:[.16,1,.3,1]},children:[v.jsxs("h1",{className:"hero-hello",children:["Hello",v.jsx("span",{children:"."})]}),v.jsxs("div",{className:"hero-name-row",children:[v.jsx("div",{className:"hero-dash"}),v.jsx("span",{className:"hero-name",children:"I'm Hariharan"})]}),v.jsxs("h2",{className:"hero-title",children:["Founder & Lead Dev",v.jsx("span",{className:"hero-title-at",children:"at Skyrovix"})]}),v.jsx("div",{className:"hero-subtitle",children:"FULL STACK DEVELOPER | AI DEVELOPER | SOFTWARE ENGINEER"}),v.jsxs("div",{className:"desktop-only-content",children:[v.jsx("p",{className:"hero-desc",children:"I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities."}),v.jsxs("div",{className:"hero-buttons",children:[v.jsx("a",{href:"#contact",className:"btn btn-primary",children:"Get a project!"}),v.jsx("a",{href:"/hariharan_portfolio/Hariharan-CV.pdf",download:!0,className:"btn btn-secondary",children:"Download CV"})]})]})]}),v.jsx(nt.div,{className:"hero-right",initial:{opacity:0,scale:.9},animate:{opacity:1,scale:1},transition:{duration:.8,delay:.15,ease:[.16,1,.3,1]},children:v.jsxs("div",{className:"avatar-container",children:[v.jsx(nt.div,{className:"avatar-glow",animate:{scale:[1,1.05,1],opacity:[.8,1,.8]},transition:{repeat:1/0,duration:4,ease:"easeInOut"}}),v.jsx("div",{className:"avatar-bg-circle-purple"}),v.jsx(nt.div,{className:"avatar-bg-circle-dashed",animate:{rotate:360},transition:{repeat:1/0,duration:30,ease:"linear"}}),v.jsx("div",{className:"avatar-bg-circle-red"}),v.jsx("div",{className:"avatar-img-box",children:v.jsx("img",{src:k3,alt:"Hariharan S.",className:"avatar-img"})}),v.jsx(nt.div,{className:"floating-shape-dot",style:{width:"12px",height:"12px",backgroundColor:"#e12c43",top:"12%",right:"25%"},animate:{y:[0,-15,0],x:[0,10,0],scale:[1,1.1,1]},transition:{repeat:1/0,duration:4.5,ease:"easeInOut"}}),v.jsx(nt.div,{className:"floating-shape-dot",style:{width:"6px",height:"6px",backgroundColor:"white",bottom:"45%",left:"10%"},animate:{y:[0,12,0],x:[0,-8,0],opacity:[.6,1,.6]},transition:{repeat:1/0,duration:5,ease:"easeInOut",delay:.5}}),v.jsx(nt.div,{className:"floating-shape-triangle triangle-up",style:{top:"28%",right:"15%"},animate:{y:[0,-10,0],rotate:[0,20,0]},transition:{repeat:1/0,duration:5.5,ease:"easeInOut",delay:1}}),v.jsx(nt.div,{className:"floating-shape-triangle triangle-down",style:{bottom:"25%",right:"28%"},animate:{y:[0,12,0],rotate:[0,-20,0]},transition:{repeat:1/0,duration:6,ease:"easeInOut",delay:.2}}),v.jsx(nt.div,{className:"floating-shape-triangle triangle-up",style:{top:"15%",left:"22%"},animate:{y:[0,-8,0],rotate:[-30,-5,-30]},transition:{repeat:1/0,duration:5,ease:"easeInOut",delay:1.5}}),v.jsxs("div",{className:"hero-social-sidebar",children:[v.jsx("span",{className:"sidebar-text",children:"FOLLOW ME ON:"}),v.jsx("div",{className:"sidebar-line"}),v.jsx("a",{href:"https://github.com/hariharan1022",target:"_blank",rel:"noopener noreferrer",className:"sidebar-icon","aria-label":"GitHub",children:v.jsx(po,{size:18})}),v.jsx("a",{href:"https://www.linkedin.com/in/hariharan-s-92b566381",target:"_blank",rel:"noopener noreferrer",className:"sidebar-icon","aria-label":"LinkedIn",children:v.jsx(_c,{size:18})}),v.jsx("a",{href:"https://wa.me/919940773204",target:"_blank",rel:"noopener noreferrer",className:"sidebar-icon","aria-label":"WhatsApp",children:v.jsx(Vc,{size:18})}),v.jsx("a",{href:"https://instagram.com/",target:"_blank",rel:"noopener noreferrer",className:"sidebar-icon","aria-label":"Instagram",children:v.jsx($0,{size:18})})]})]})})]}),v.jsxs(nt.div,{className:"hero-section-2-mobile",initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.6,delay:.2},children:[v.jsx("p",{className:"hero-desc",children:"I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities."}),v.jsxs("div",{className:"hero-buttons",children:[v.jsx("a",{href:"#contact",className:"btn btn-primary",children:"Get a project!"}),v.jsx("a",{href:"/hariharan_portfolio/Hariharan-CV.pdf",download:!0,className:"btn btn-secondary",children:"Download CV"})]}),v.jsxs("div",{className:"hero-social-mobile",children:[v.jsx("span",{className:"hero-social-label",children:"CONNECT WITH ME"}),v.jsxs("div",{className:"hero-social-icons",children:[v.jsx("a",{href:"https://github.com/hariharan1022",target:"_blank",rel:"noopener noreferrer",className:"hero-social-btn","aria-label":"GitHub",children:v.jsx(po,{size:18})}),v.jsx("a",{href:"https://www.linkedin.com/in/hariharan-s-92b566381",target:"_blank",rel:"noopener noreferrer",className:"hero-social-btn","aria-label":"LinkedIn",children:v.jsx(_c,{size:18})}),v.jsx("a",{href:"https://wa.me/919940773204",target:"_blank",rel:"noopener noreferrer",className:"hero-social-btn","aria-label":"WhatsApp",children:v.jsx(Vc,{size:18})}),v.jsx("a",{href:"https://instagram.com/",target:"_blank",rel:"noopener noreferrer",className:"hero-social-btn","aria-label":"Instagram",children:v.jsx($0,{size:18})})]})]})]})]}),v.jsx(nt.div,{className:"skills-bar-wrapper",initial:{opacity:0,y:20},animate:{opacity:1,y:0},transition:{duration:.6,delay:.3},children:v.jsx("div",{className:"skills-bar-content",children:Y3.map(i=>v.jsx("span",{className:"skill-item",children:i},i))})})]})]}),q3=[{name:"Innovation",icon:m3},{name:"Problem Solving",icon:_3},{name:"Clean Code",icon:i3},{name:"User-Centered Design",icon:B3}],X3=()=>v.jsxs(v.Fragment,{children:[v.jsx("style",{children:`
