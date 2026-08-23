@@ -1,13 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, Globe, Sparkles } from 'lucide-react';
-import tamilrockesPng from '../assets/tamilrockes.png';
-import spotifyPng from '../assets/spotify.png';
-import skyrovixInternshipPng from '../assets/skyrovix internship and learning platform.png';
-import skyrovixWebTechPng from '../assets/skyrovix web tech.png';
-import mzcetReportPng from '../assets/mzcet-weekly report automatio n.png';
-import chessPng from '../assets/chess.png';
-import nursingPng from '../assets/nursing.png';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Github, Globe, Sparkles, Maximize2, X } from 'lucide-react';
+import tamilrockesPng from '../assets/project/tamilrockes.png';
+import spotifyPng from '../assets/project/spotify.png';
+import skyrovixInternshipPng from '../assets/project/skyrovix internship and learning platform.png';
+import skyrovixWebTechPng from '../assets/project/skyrovix web tech.png';
+import mzcetReportPng from '../assets/project/mzcet-weekly report automatio n.png';
+import chessPng from '../assets/project/chess.png';
+import nursingPng from '../assets/project/nursing.png';
+import jarvishSosPng from '../assets/project/jarvish-sos.png';
+import mzcetAiGdPng from '../assets/project/mzcet Ai group discusstion.png';
 
 const TiltCard = ({ children, style }) => {
   const ref = useRef(null);
@@ -18,7 +20,7 @@ const TiltCard = ({ children, style }) => {
     const rect = ref.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: y * -10, y: x * 10 });
+    setTilt({ x: y * -8, y: x * 8 });
   };
 
   const handleMouseLeave = () => setTilt({ x: 0, y: 0 });
@@ -41,7 +43,7 @@ const TiltCard = ({ children, style }) => {
   );
 };
 
-const ProjectCard = ({ title, description, tags, image, github, live, isAgency, index }) => {
+const ProjectCard = ({ title, description, tags, image, github, live, isAgency, index, onExpand }) => {
   const [imgHover, setImgHover] = useState(false);
 
   return (
@@ -54,19 +56,27 @@ const ProjectCard = ({ title, description, tags, image, github, live, isAgency, 
       onMouseEnter={() => setImgHover(true)}
       onMouseLeave={() => setImgHover(false)}
     >
-      <div className="project-img-wrapper">
+      <div 
+        className="project-img-wrapper" 
+        onClick={() => onExpand({ title, description, tags, image, github, live })}
+        title="Click to view full screenshot"
+      >
         <motion.img
           src={image} alt={title}
           className="project-img"
-          animate={{ scale: imgHover ? 1.08 : 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          animate={{ scale: imgHover ? 1.04 : 1 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         />
         {isAgency && (
           <div className="project-badge">
             <Globe size={12} /> COMPANY
           </div>
         )}
-        <div className="project-img-overlay" />
+        <div className="project-img-overlay">
+          <span className="expand-pill">
+            <Maximize2 size={14} /> Full View
+          </span>
+        </div>
       </div>
       
       <div className="project-content">
@@ -114,6 +124,8 @@ const ProjectCard = ({ title, description, tags, image, github, live, isAgency, 
 };
 
 const Projects = () => {
+  const [activeModal, setActiveModal] = useState(null);
+
   const projects = [
     {
       title: 'Skyrovix Internship & Learning Platform',
@@ -138,6 +150,18 @@ const Projects = () => {
       image: mzcetReportPng,
       github: 'https://github.com/hariharan1022/MZCET-WEEKLY-REPORT-AUTOMATION',
       live: 'https://hariharan1022.github.io/MZCET-WEEKLY-REPORT-AUTOMATION/',
+    },
+    {
+      title: 'SafeNova AI - Jarvish Emergency SOS',
+      description: 'An AI-powered personal safety and emergency guardian system featuring voice-activated triggers ("Nova Help Me"), real-time location tracking, automated threat deterrence, and trusted guardian alerts.',
+      tags: ['React', 'AI Guardian', 'Voice Trigger', 'Emergency SOS', 'Real-Time Tracking'],
+      image: jarvishSosPng,
+    },
+    {
+      title: 'MZ ThinkCircle - AI Group Discussion Portal',
+      description: 'An intelligent communication analytics platform for students featuring AI-driven solo practice, real-time group discussion sessions, and automated speech analysis (Grammar, Fluency, Pronunciation & Confidence).',
+      tags: ['React', 'AI Analytics', 'Speech Processing', 'Group Discussion', 'E-Learning'],
+      image: mzcetAiGdPng,
     },
     {
       title: 'Masters Chess Academy',
@@ -182,7 +206,7 @@ const Projects = () => {
 
         .projects-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
           gap: 32px;
           align-items: stretch;
         }
@@ -199,21 +223,32 @@ const Projects = () => {
         }
 
         .project-card:hover {
-          border-color: rgba(255, 255, 255, 0.1);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          border-color: rgba(255, 94, 67, 0.25);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .project-img-wrapper {
-          height: 220px;
+          height: 240px;
           overflow: hidden;
           position: relative;
-          background: #09090e;
+          background: #080a12;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 12px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          cursor: pointer;
         }
 
         .project-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          border-radius: 8px;
+          filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+          transition: transform 0.4s ease;
         }
 
         .project-badge {
@@ -230,15 +265,37 @@ const Projects = () => {
           display: flex;
           align-items: center;
           gap: 5px;
-          z-index: 2;
+          z-index: 3;
         }
 
         .project-img-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, transparent 40%, rgba(10, 15, 25, 0.95));
-          pointer-events: none;
-          z-index: 1;
+          background: rgba(8, 10, 18, 0.6);
+          backdrop-filter: blur(3px);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 2;
+        }
+
+        .project-img-wrapper:hover .project-img-overlay {
+          opacity: 1;
+        }
+
+        .expand-pill {
+          background: linear-gradient(135deg, #ff5e43, #fb923c);
+          color: white;
+          padding: 8px 18px;
+          border-radius: 100px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          box-shadow: 0 8px 20px rgba(255, 94, 67, 0.4);
         }
 
         .project-content {
@@ -329,6 +386,9 @@ const Projects = () => {
           .projects-section {
             padding: 80px 20px;
           }
+          .projects-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
 
@@ -344,13 +404,117 @@ const Projects = () => {
         <div className="projects-grid">
           {projects.map((project, index) => (
             <TiltCard key={index}>
-              <ProjectCard {...project} index={index} />
+              <ProjectCard {...project} index={index} onExpand={setActiveModal} />
             </TiltCard>
           ))}
         </div>
       </section>
+
+      <AnimatePresence>
+        {activeModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveModal(null)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 9999,
+              background: 'rgba(5, 7, 12, 0.92)',
+              backdropFilter: 'blur(12px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '24px',
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                maxWidth: '1200px',
+                width: '100%',
+                maxHeight: '92vh',
+                background: '#0d131f',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                boxShadow: '0 30px 60px rgba(0,0,0,0.7)',
+                position: 'relative',
+              }}
+            >
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '18px 24px',
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+                background: 'rgba(255,255,255,0.02)',
+              }}>
+                <div>
+                  <h3 style={{ margin: 0, color: 'white', fontFamily: 'Outfit', fontSize: '1.2rem' }}>
+                    {activeModal.title}
+                  </h3>
+                  <p style={{ margin: '2px 0 0', color: '#94a3b8', fontSize: '0.82rem' }}>
+                    Full Project Screenshot Preview
+                  </p>
+                </div>
+                <button
+                  onClick={() => setActiveModal(null)}
+                  style={{
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    color: 'white',
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'background 0.2s',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = '#ff5e43'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div style={{
+                flex: 1,
+                overflow: 'auto',
+                background: '#06080e',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '24px',
+              }}>
+                <img
+                  src={activeModal.image}
+                  alt={activeModal.title}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                    borderRadius: '12px',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
+                  }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
 
 export default Projects;
+

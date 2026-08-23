@@ -221,7 +221,7 @@ const About = () => {
             
             <div className="about-stats-container">
               <div className="about-stat-item">
-                <span className="about-stat-number">7+</span>
+                <span className="about-stat-number">9+</span>
                 <span className="about-stat-label">Projects Built</span>
               </div>
               <div className="about-stat-item">

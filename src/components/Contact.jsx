@@ -214,22 +214,44 @@ const Contact = () => {
 
         @media (max-width: 768px) {
           #contact {
-            padding: 10px 20px;
+            padding: 10px 12px;
           }
           .contact-glass-container {
-            padding: 40px 30px;
+            padding: 32px 18px;
             border-radius: 20px;
           }
+          .contact-eyebrow {
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+          }
+          .contact-heading {
+            font-size: clamp(1.8rem, 6.5vw, 2.5rem);
+            margin-bottom: 24px;
+            line-height: 1.15;
+          }
           .huge-email-link {
-            gap: 12px;
+            font-size: clamp(0.82rem, 4.2vw, 1.1rem);
+            gap: 8px;
+            margin-bottom: 32px;
+            max-width: 100%;
+            word-break: break-all;
           }
           .huge-email-icon {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+          }
+          .social-pills-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
           }
           .social-pill {
-            padding: 12px 24px;
-            font-size: 0.9rem;
+            padding: 12px 14px;
+            font-size: 0.85rem;
+            justify-content: center;
+            width: 100%;
           }
         }
       `}</style>

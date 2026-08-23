@@ -32,11 +32,17 @@ const Hero = () => {
           width: 100%;
           margin: 0 auto;
           padding: 0 40px;
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+        }
+
+        .hero-top-grid {
           display: grid;
           grid-template-columns: 1.1fr 0.9fr;
           gap: 60px;
           align-items: center;
-          flex-grow: 1;
+          width: 100%;
         }
 
         .hero-left {
@@ -97,8 +103,8 @@ const Hero = () => {
 
         .hero-subtitle {
           font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-          font-weight: 500;
+          font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+          font-weight: 600;
           color: #ff5e43;
           margin-bottom: 24px;
           letter-spacing: 0.05em;
@@ -118,6 +124,10 @@ const Hero = () => {
           gap: 16px;
         }
 
+        .hero-section-2-mobile {
+          display: none;
+        }
+
         .hero-right {
           display: flex;
           justify-content: center;
@@ -125,7 +135,7 @@ const Hero = () => {
           position: relative;
         }
 
-        /* Avatar styling matching mockup 2 (with 3D popout cutout) */
+        /* Avatar styling matching mockup */
         .avatar-container {
           --avatar-w: 380px;
           --avatar-h: 420px;
@@ -146,7 +156,7 @@ const Hero = () => {
           width: var(--avatar-w);
           height: var(--avatar-h);
           display: flex;
-          align-items: flex-end; /* Align the bottom of cutout portrait to container bottom */
+          align-items: flex-end;
           justify-content: center;
         }
 
@@ -160,19 +170,17 @@ const Hero = () => {
           bottom: 40px;
         }
 
-        /* Offset solid crimson circle */
         .avatar-bg-circle-red {
           position: absolute;
           width: var(--circle-red-size);
           height: var(--circle-red-size);
-          background-color: #e12c43; /* Crimson red */
+          background-color: #e12c43;
           border-radius: 50%;
           left: var(--circle-red-left);
           bottom: var(--circle-red-bottom);
           z-index: 1;
         }
 
-        /* Offset dark purple circle */
         .avatar-bg-circle-purple {
           position: absolute;
           width: var(--circle-purple-size);
@@ -185,7 +193,6 @@ const Hero = () => {
           z-index: 0;
         }
 
-        /* Dashed circle border */
         .avatar-bg-circle-dashed {
           position: absolute;
           width: var(--circle-dashed-size);
@@ -197,7 +204,6 @@ const Hero = () => {
           left: var(--circle-dashed-left);
         }
 
-        /* Floating geometric shapes */
         .floating-shape-dot {
           position: absolute;
           border-radius: 50%;
@@ -223,17 +229,16 @@ const Hero = () => {
           border-top: 9px solid #e12c43;
         }
 
-        /* Transparent Developer image container overlaying circles */
         .avatar-img-box {
           position: absolute;
           width: var(--img-box-w);
           height: var(--img-box-h);
           bottom: 0;
-          z-index: 4; /* Sits on top of background circles and floaters */
+          z-index: 4;
           display: flex;
           align-items: flex-end;
           justify-content: center;
-          overflow: visible; /* Let the scaled head stand out upward */
+          overflow: visible;
         }
 
         .avatar-img {
@@ -241,15 +246,14 @@ const Hero = () => {
           height: 100%;
           object-fit: contain;
           z-index: 5;
-          transform: scale(1.0); /* Reduced scale to fit the image properly */
-          transform-origin: bottom center; /* Anchor scaling to the bottom */
-          filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.65)); /* Premium 3D drop-shadow */
-          /* Smooth fade-out at the bottom to seamlessly hide straight crops */
+          transform: scale(1.0);
+          transform-origin: bottom center;
+          filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.65));
           mask-image: linear-gradient(to top, transparent 0%, black 15%, black 100%);
           -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%, black 100%);
         }
 
-        /* Vertical social sidebar */
+        /* Vertical social sidebar (Desktop) */
         .hero-social-sidebar {
           position: absolute;
           right: -80px;
@@ -294,32 +298,41 @@ const Hero = () => {
           transform: scale(1.15);
         }
 
-        /* Bottom Skills Bar */
-        .skills-bar {
+        /* SECTION 3: Independent Full-Width Skills Section */
+        .skills-bar-wrapper {
           width: 100%;
           background: #111723;
-          border-top: 1px solid rgba(255, 255, 255, 0.04);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-          padding: 26px 40px;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          margin-top: 50px;
+          padding: 24px 0;
+        }
+
+        .skills-bar-content {
+          max-width: 1200px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 0 40px;
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
-          gap: 56px;
-          margin-top: 60px;
+          flex-wrap: wrap;
+          gap: 20px 32px;
         }
 
         .skill-item {
           font-family: 'Outfit', sans-serif;
           font-size: 0.95rem;
-          font-weight: 500;
-          color: rgba(148, 163, 184, 0.5);
-          transition: color 0.2s;
+          font-weight: 600;
+          color: #94a3b8;
+          transition: color 0.3s ease, transform 0.3s ease;
           cursor: default;
           letter-spacing: 0.02em;
         }
 
         .skill-item:hover {
           color: white;
+          transform: translateY(-2px);
         }
 
         @media (max-width: 1024px) {
@@ -328,134 +341,332 @@ const Hero = () => {
           }
         }
 
+        /* MOBILE OVERRIDES: EXACT 3-SECTION LAYOUT */
         @media (max-width: 900px) {
-          .hero-container {
-            grid-template-columns: 1fr;
-            gap: 40px;
-            text-align: center;
-            padding-top: 20px;
-          }
-          .hero-left {
-            align-items: center;
-            order: 2;
-          }
-          .hero-right {
-            order: 1;
-            margin-bottom: 20px;
-            flex-direction: column;
-            gap: 16px;
-          }
-          .hero-name-row {
-            justify-content: center;
-          }
-          .skills-bar {
-            margin-top: 40px;
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px 24px;
-          }
-          .hero-social-sidebar {
-            position: relative;
-            right: 0;
-            top: 0;
-            transform: none;
-            flex-direction: row;
-            justify-content: center;
-            margin-top: 10px;
-            gap: 20px;
-          }
-          .sidebar-text {
-            writing-mode: horizontal-tb;
-            transform: none;
-            margin-bottom: 0;
-          }
-          .sidebar-line {
-            width: 30px;
-            height: 1px;
-            background: #e12c43;
-            margin-bottom: 0;
-          }
-        }
-
-        @media (max-width: 600px) {
           .hero-section {
             padding-top: 100px;
+          }
+          .hero-container {
+            padding: 0 16px;
+          }
+          .desktop-only-content {
+            display: none !important;
+          }
+          .hero-top-grid {
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 12px;
+            align-items: center;
+          }
+          .hero-hello {
+            font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+          }
+          .hero-title {
+            font-size: clamp(1.25rem, 4vw, 2rem);
           }
           .hero-title-at {
             display: block;
             margin-left: 0;
-            margin-top: 4px;
             font-size: 0.55em;
+            margin-top: 2px;
           }
           .hero-subtitle {
-            font-size: 0.8rem;
-            line-height: 1.4;
+            font-size: clamp(0.65rem, 2.2vw, 0.85rem);
             letter-spacing: 0.03em;
-            margin-bottom: 16px;
+            margin: 0 0 12px 0;
           }
-          .hero-buttons {
+          .hero-social-sidebar {
+            display: none !important;
+          }
+
+          /* SECTION 2: FULL WIDTH BELOW HERO TOP GRID */
+          .hero-section-2-mobile {
+            display: flex;
             flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
             width: 100%;
-            max-width: 320px;
-            margin: 0 auto;
+            margin-top: 24px;
           }
-          .hero-buttons .btn {
+          .hero-section-2-mobile .hero-desc {
+            max-width: 100%;
+            margin-bottom: 24px;
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #94a3b8;
+          }
+          .hero-section-2-mobile .hero-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
             width: 100%;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+          }
+          .hero-section-2-mobile .hero-social-mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            width: 100%;
+          }
+          .hero-social-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #ff5e43;
+            letter-spacing: 0.15em;
+          }
+          .hero-social-icons {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+          }
+          .hero-social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+          }
+          .hero-social-btn:hover, .hero-social-btn:active {
+            background: #ff5e43;
+            border-color: #ff5e43;
+            color: white;
+            transform: translateY(-2px);
+          }
+
+          /* SECTION 3: FULL WIDTH SKILLS */
+          .skills-bar-wrapper {
+            margin-top: 32px;
+            padding: 20px 0;
+          }
+          .skills-bar-content {
+            padding: 0 20px;
+            justify-content: center;
+            gap: 12px 20px;
+          }
+          .skill-item {
+            font-size: 0.88rem;
+          }
+
+          /* SECTION 1 RIGHT PHOTO CONTAINER SIZING */
+          .avatar-container {
+            --avatar-w: 200px;
+            --avatar-h: 230px;
+            --avatar-glow-size: 200px;
+            --circle-red-size: 135px;
+            --circle-red-left: 12px;
+            --circle-red-bottom: 35px;
+            --circle-purple-size: 155px;
+            --circle-purple-right: 10px;
+            --circle-purple-top: 12px;
+            --circle-dashed-size: 175px;
+            --circle-dashed-top: 15px;
+            --circle-dashed-left: 10px;
+            --img-box-w: 170px;
+            --img-box-h: 210px;
           }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 540px) {
+          .hero-top-grid {
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 8px;
+          }
           .avatar-container {
-            --avatar-w: 280px;
-            --avatar-h: 310px;
-            --avatar-glow-size: 290px;
-            --circle-red-size: 180px;
-            --circle-red-left: 15px;
-            --circle-red-bottom: 50px;
-            --circle-purple-size: 215px;
-            --circle-purple-right: 15px;
-            --circle-purple-top: 20px;
-            --circle-dashed-size: 245px;
-            --circle-dashed-top: 30px;
-            --circle-dashed-left: 20px;
-            --img-box-w: 235px;
-            --img-box-h: 280px;
+            --avatar-w: 150px;
+            --avatar-h: 180px;
+            --avatar-glow-size: 150px;
+            --circle-red-size: 100px;
+            --circle-red-left: 8px;
+            --circle-red-bottom: 25px;
+            --circle-purple-size: 120px;
+            --circle-purple-right: 6px;
+            --circle-purple-top: 10px;
+            --circle-dashed-size: 135px;
+            --circle-dashed-top: 12px;
+            --circle-dashed-left: 6px;
+            --img-box-w: 130px;
+            --img-box-h: 165px;
           }
-          .sidebar-text,
-          .sidebar-line {
-            display: none;
+          .hero-hello {
+            font-size: 1.65rem;
           }
-          .skills-bar {
-            gap: 12px 18px;
+          .hero-dash {
+            width: 16px;
+          }
+          .hero-name {
+            font-size: 0.88rem;
+          }
+          .hero-title {
+            font-size: 1.15rem;
+          }
+          .hero-subtitle {
+            font-size: 0.58rem;
+            line-height: 1.35;
+          }
+          .hero-section-2-mobile {
+            margin-top: 20px;
+          }
+          .hero-section-2-mobile .hero-desc {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-bottom: 18px;
+          }
+          .hero-section-2-mobile .hero-buttons {
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+          }
+          .hero-section-2-mobile .hero-buttons .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 9px 12px;
+            font-size: 0.78rem;
+          }
+          .hero-social-btn {
+            width: 34px;
+            height: 34px;
+          }
+          .skills-bar-wrapper {
+            padding: 16px 0;
+            margin-top: 24px;
+          }
+          .skills-bar-content {
+            padding: 0 12px;
+            gap: 10px 16px;
           }
           .skill-item {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
           }
         }
       `}</style>
 
       <section id="home" className="hero-section">
         <div className="hero-container">
+          {/* SECTION 1 — MAIN HERO (TOP ROW) */}
+          <div className="hero-top-grid">
+            {/* LEFT */}
+            <motion.div 
+              className="hero-left"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <h1 className="hero-hello">Hello<span>.</span></h1>
+              
+              <div className="hero-name-row">
+                <div className="hero-dash" />
+                <span className="hero-name">I'm Hariharan</span>
+              </div>
+              
+              <h2 className="hero-title">Founder & Lead Dev<span className="hero-title-at">at Skyrovix</span></h2>
+              
+              <div className="hero-subtitle">FULL STACK DEVELOPER | AI DEVELOPER | SOFTWARE ENGINEER</div>
+
+              {/* Desktop-only content rendered inside left column */}
+              <div className="desktop-only-content">
+                <p className="hero-desc">
+                  I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities.
+                </p>
+                
+                <div className="hero-buttons">
+                  <a href="#contact" className="btn btn-primary">Get a project!</a>
+                  <a href={`${import.meta.env.BASE_URL}Hariharan-CV.pdf`} download className="btn btn-secondary">Download CV</a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* RIGHT */}
+            <motion.div 
+              className="hero-right"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="avatar-container">
+                <motion.div 
+                  className="avatar-glow" 
+                  animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                />
+                
+                <div className="avatar-bg-circle-purple" />
+                <motion.div 
+                  className="avatar-bg-circle-dashed" 
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+                />
+                <div className="avatar-bg-circle-red" />
+                
+                <div className="avatar-img-box">
+                  <img src={studentImg} alt="Hariharan S." className="avatar-img" />
+                </div>
+
+                <motion.div 
+                  className="floating-shape-dot" 
+                  style={{ width: '12px', height: '12px', backgroundColor: '#e12c43', top: '12%', right: '25%' }}
+                  animate={{ y: [0, -15, 0], x: [0, 10, 0], scale: [1, 1.1, 1] }}
+                  transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+                />
+                <motion.div 
+                  className="floating-shape-dot" 
+                  style={{ width: '6px', height: '6px', backgroundColor: 'white', bottom: '45%', left: '10%' }}
+                  animate={{ y: [0, 12, 0], x: [0, -8, 0], opacity: [0.6, 1, 0.6] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
+                />
+                <motion.div 
+                  className="floating-shape-triangle triangle-up" 
+                  style={{ top: '28%', right: '15%' }}
+                  animate={{ y: [0, -10, 0], rotate: [0, 20, 0] }}
+                  transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 1 }}
+                />
+                <motion.div 
+                  className="floating-shape-triangle triangle-down" 
+                  style={{ bottom: '25%', right: '28%' }}
+                  animate={{ y: [0, 12, 0], rotate: [0, -20, 0] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.2 }}
+                />
+                <motion.div 
+                  className="floating-shape-triangle triangle-up" 
+                  style={{ top: '15%', left: '22%' }}
+                  animate={{ y: [0, -8, 0], rotate: [-30, -5, -30] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
+                />
+
+                <div className="hero-social-sidebar">
+                  <span className="sidebar-text">FOLLOW ME ON:</span>
+                  <div className="sidebar-line" />
+                  <a href="https://github.com/hariharan1022" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="GitHub">
+                    <Github size={18} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/hariharan-s-92b566381" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="LinkedIn">
+                    <Linkedin size={18} />
+                  </a>
+                  <a href="https://wa.me/919940773204" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="WhatsApp">
+                    <MessageSquare size={18} />
+                  </a>
+                  <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="Instagram">
+                    <Instagram size={18} />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* SECTION 2 — FULL WIDTH (MOBILE) */}
           <motion.div 
-            className="hero-left"
-            initial={{ opacity: 0, y: 30 }}
+            className="hero-section-2-mobile"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="hero-hello">Hello<span>.</span></h1>
-            
-            <div className="hero-name-row">
-              <div className="hero-dash" />
-              <span className="hero-name">I'm Hariharan</span>
-            </div>
-            
-            <h2 className="hero-title">Founder & Lead Dev<span className="hero-title-at">at Skyrovix</span></h2>
-            
-            <div className="hero-subtitle">FULL STACK DEVELOPER | AI DEVELOPER | SOFTWARE ENGINEER</div>
-            
             <p className="hero-desc">
               I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities.
             </p>
@@ -464,81 +675,20 @@ const Hero = () => {
               <a href="#contact" className="btn btn-primary">Get a project!</a>
               <a href={`${import.meta.env.BASE_URL}Hariharan-CV.pdf`} download className="btn btn-secondary">Download CV</a>
             </div>
-          </motion.div>
 
-          <motion.div 
-            className="hero-right"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="avatar-container">
-              <motion.div 
-                className="avatar-glow" 
-                animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              />
-              
-              {/* Concentric mockup rings */}
-              <div className="avatar-bg-circle-purple" />
-              <motion.div 
-                className="avatar-bg-circle-dashed" 
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-              />
-              <div className="avatar-bg-circle-red" />
-              
-              {/* Transparent background image sitting on top of circles, not cropped */}
-              <div className="avatar-img-box">
-                <img src={studentImg} alt="Hariharan S." className="avatar-img" />
-              </div>
-
-              {/* Floating shapes matching mockup */}
-              <motion.div 
-                className="floating-shape-dot" 
-                style={{ width: '12px', height: '12px', backgroundColor: '#e12c43', top: '12%', right: '25%' }}
-                animate={{ y: [0, -15, 0], x: [0, 10, 0], scale: [1, 1.1, 1] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-              />
-              <motion.div 
-                className="floating-shape-dot" 
-                style={{ width: '6px', height: '6px', backgroundColor: 'white', bottom: '45%', left: '10%' }}
-                animate={{ y: [0, 12, 0], x: [0, -8, 0], opacity: [0.6, 1, 0.6] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
-              />
-              <motion.div 
-                className="floating-shape-triangle triangle-up" 
-                style={{ top: '28%', right: '15%' }}
-                animate={{ y: [0, -10, 0], rotate: [0, 20, 0] }}
-                transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 1 }}
-              />
-              <motion.div 
-                className="floating-shape-triangle triangle-down" 
-                style={{ bottom: '25%', right: '28%' }}
-                animate={{ y: [0, 12, 0], rotate: [0, -20, 0] }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.2 }}
-              />
-              <motion.div 
-                className="floating-shape-triangle triangle-up" 
-                style={{ top: '15%', left: '22%' }}
-                animate={{ y: [0, -8, 0], rotate: [-30, -5, -30] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
-              />
-
-              {/* Vertical social sidebar */}
-              <div className="hero-social-sidebar">
-                <span className="sidebar-text">FOLLOW ME ON:</span>
-                <div className="sidebar-line" />
-                <a href="https://github.com/hariharan1022" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="GitHub">
+            <div className="hero-social-mobile">
+              <span className="hero-social-label">CONNECT WITH ME</span>
+              <div className="hero-social-icons">
+                <a href="https://github.com/hariharan1022" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="GitHub">
                   <Github size={18} />
                 </a>
-                <a href="https://www.linkedin.com/in/hariharan-s-92b566381" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/hariharan-s-92b566381" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="LinkedIn">
                   <Linkedin size={18} />
                 </a>
-                <a href="https://wa.me/919940773204" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="WhatsApp">
+                <a href="https://wa.me/919940773204" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="WhatsApp">
                   <MessageSquare size={18} />
                 </a>
-                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="sidebar-icon" aria-label="Instagram">
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="Instagram">
                   <Instagram size={18} />
                 </a>
               </div>
@@ -546,16 +696,18 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Inline skills bar matching mockup */}
+        {/* SECTION 3 — TECHNOLOGIES / SKILLS (FULL WIDTH) */}
         <motion.div 
-          className="skills-bar"
+          className="skills-bar-wrapper"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          {skills.map((skill, index) => (
-            <span key={skill} className="skill-item">{skill}</span>
-          ))}
+          <div className="skills-bar-content">
+            {skills.map((skill) => (
+              <span key={skill} className="skill-item">{skill}</span>
+            ))}
+          </div>
         </motion.div>
       </section>
     </>
@@ -563,3 +715,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
