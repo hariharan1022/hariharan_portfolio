@@ -148,6 +148,12 @@ const Services = () => {
           position: relative;
           z-index: 1;
         }
+
+        @media (max-width: 768px) {
+          .services-section {
+            display: none !important;
+          }
+        }
       `}</style>
 
       <section id="services" className="services-section">
