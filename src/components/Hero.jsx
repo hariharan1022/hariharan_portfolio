@@ -261,11 +261,23 @@ const Hero = () => {
           position: absolute;
           width: var(--circle-dashed-size);
           height: var(--circle-dashed-size);
-          border: 1px dashed rgba(255, 58, 85, 0.25);
+          border: 1px dashed rgba(255, 58, 85, 0.28);
           border-radius: 50%;
           z-index: 0;
           top: var(--circle-dashed-top);
           left: var(--circle-dashed-left);
+        }
+
+        .avatar-bg-circle-inner-orbit {
+          position: absolute;
+          width: calc(var(--circle-purple-size) * 0.85);
+          height: calc(var(--circle-purple-size) * 0.85);
+          border: 1px dotted rgba(255, 94, 67, 0.35);
+          border-radius: 50%;
+          z-index: 1;
+          top: calc(var(--circle-purple-top) + 15px);
+          right: calc(var(--circle-purple-right) + 15px);
+          pointer-events: none;
         }
 
         .floating-shape-dot {
@@ -668,55 +680,103 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="avatar-container">
+                {/* Dynamic Dual-Tone Glow Aura */}
                 <motion.div 
                   className="avatar-glow" 
-                  animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
-                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                  animate={{ 
+                    scale: [1, 1.15, 1], 
+                    opacity: [0.6, 0.95, 0.6],
+                    rotate: [0, 180, 360]
+                  }}
+                  transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
                 />
                 
-                <div className="avatar-bg-circle-purple" />
+                {/* Floating Breathing Purple Background Circle */}
+                <motion.div 
+                  className="avatar-bg-circle-purple" 
+                  animate={{ 
+                    scale: [1, 1.05, 0.96, 1], 
+                    y: [0, 8, -6, 0], 
+                    x: [0, -6, 6, 0] 
+                  }}
+                  transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+                />
+
+                {/* Outer Clockwise Rotating Dashed Tech Ring */}
                 <motion.div 
                   className="avatar-bg-circle-dashed" 
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+                  animate={{ 
+                    rotate: 360,
+                    scale: [1, 1.04, 1]
+                  }}
+                  transition={{ 
+                    rotate: { repeat: Infinity, duration: 25, ease: "linear" },
+                    scale: { repeat: Infinity, duration: 6, ease: "easeInOut" }
+                  }}
                 />
-                <div className="avatar-bg-circle-red" />
+
+                {/* Inner Counter-Clockwise Dotted Orbit Ring */}
+                <motion.div 
+                  className="avatar-bg-circle-inner-orbit" 
+                  animate={{ rotate: -360 }}
+                  transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
+                />
+
+                {/* Floating Breathing Red Accent Circle */}
+                <motion.div 
+                  className="avatar-bg-circle-red" 
+                  animate={{ 
+                    scale: [1, 1.08, 0.95, 1], 
+                    y: [0, -10, 6, 0], 
+                    x: [0, 8, -4, 0] 
+                  }}
+                  transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+                />
                 
+                {/* Smooth Floating Cutout Portrait */}
                 <div className="avatar-img-box">
-                  <img src={studentImg} alt="Hariharan S." className="avatar-img" />
+                  <motion.img 
+                    src={studentImg} 
+                    alt="Hariharan S." 
+                    className="avatar-img"
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut" }}
+                  />
                 </div>
 
+                {/* Dynamic Animated Floating Shapes */}
                 <motion.div 
                   className="floating-shape-dot" 
-                  style={{ width: '12px', height: '12px', backgroundColor: '#e12c43', top: '12%', right: '25%' }}
-                  animate={{ y: [0, -15, 0], x: [0, 10, 0], scale: [1, 1.1, 1] }}
+                  style={{ width: '12px', height: '12px', backgroundColor: '#e12c43', top: '12%', right: '25%', boxShadow: '0 0 12px #e12c43' }}
+                  animate={{ y: [0, -18, 0], x: [0, 12, 0], scale: [1, 1.3, 1] }}
                   transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
                 />
                 <motion.div 
                   className="floating-shape-dot" 
-                  style={{ width: '6px', height: '6px', backgroundColor: 'white', bottom: '45%', left: '10%' }}
-                  animate={{ y: [0, 12, 0], x: [0, -8, 0], opacity: [0.6, 1, 0.6] }}
+                  style={{ width: '8px', height: '8px', backgroundColor: 'white', bottom: '42%', left: '8%', boxShadow: '0 0 10px white' }}
+                  animate={{ y: [0, 16, 0], x: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
                   transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
                 />
                 <motion.div 
                   className="floating-shape-triangle triangle-up" 
                   style={{ top: '28%', right: '15%' }}
-                  animate={{ y: [0, -10, 0], rotate: [0, 20, 0] }}
+                  animate={{ y: [0, -14, 0], rotate: [0, 45, 0], scale: [1, 1.2, 1] }}
                   transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 1 }}
                 />
                 <motion.div 
                   className="floating-shape-triangle triangle-down" 
                   style={{ bottom: '25%', right: '28%' }}
-                  animate={{ y: [0, 12, 0], rotate: [0, -20, 0] }}
+                  animate={{ y: [0, 14, 0], rotate: [0, -45, 0], scale: [1, 1.15, 1] }}
                   transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.2 }}
                 />
                 <motion.div 
                   className="floating-shape-triangle triangle-up" 
                   style={{ top: '15%', left: '22%' }}
-                  animate={{ y: [0, -8, 0], rotate: [-30, -5, -30] }}
+                  animate={{ y: [0, -10, 0], rotate: [-30, 15, -30] }}
                   transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
                 />
 
+                {/* Vertical Social Sidebar (Desktop) */}
                 <div className="hero-social-sidebar">
                   <span className="sidebar-text">FOLLOW ME ON:</span>
                   <div className="sidebar-line" />
