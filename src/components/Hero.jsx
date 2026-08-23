@@ -13,6 +13,43 @@ const skills = [
   'AI Integration'
 ];
 
+const TypewriterSubtitle = () => {
+  const titles = [
+    'FULL STACK DEVELOPER',
+    'AI DEVELOPER',
+    'SOFTWARE ENGINEER'
+  ];
+  const [index, setIndex] = React.useState(0);
+  const [subIndex, setSubIndex] = React.useState(0);
+  const [reverse, setReverse] = React.useState(false);
+
+  React.useEffect(() => {
+    if (subIndex === titles[index].length + 1 && !reverse) {
+      const timeout = setTimeout(() => setReverse(true), 2200);
+      return () => clearTimeout(timeout);
+    }
+
+    if (subIndex === 0 && reverse) {
+      setReverse(false);
+      setIndex((prev) => (prev + 1) % titles.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (reverse ? -1 : 1));
+    }, reverse ? 35 : 75);
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, reverse]);
+
+  return (
+    <div className="hero-subtitle">
+      <span className="typewriter-text">{titles[index].substring(0, subIndex)}</span>
+      <span className="typewriter-cursor">|</span>
+    </div>
+  );
+};
+
 const Hero = () => {
   return (
     <>
@@ -104,10 +141,33 @@ const Hero = () => {
         .hero-subtitle {
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: clamp(0.85rem, 1.5vw, 1.1rem);
-          font-weight: 600;
+          font-weight: 700;
           color: #ff5e43;
           margin-bottom: 24px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.06em;
+          min-height: 28px;
+          display: flex;
+          align-items: center;
+        }
+
+        .typewriter-text {
+          background: linear-gradient(90deg, #ff5e43, #ff8c7a);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .typewriter-cursor {
+          display: inline-block;
+          margin-left: 3px;
+          color: #ff5e43;
+          font-weight: 700;
+          font-size: 1.1em;
+          animation: cursorBlink 0.8s infinite;
+        }
+
+        @keyframes cursorBlink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
         }
 
         .hero-desc {
@@ -590,7 +650,7 @@ const Hero = () => {
               
               <h2 className="hero-title">Founder & Lead Dev<span className="hero-title-at">at Skyrovix</span></h2>
               
-              <div className="hero-subtitle">FULL STACK DEVELOPER | AI DEVELOPER | SOFTWARE ENGINEER</div>
+              <TypewriterSubtitle />
 
               {/* Desktop-only content rendered inside left column */}
               <div className="desktop-only-content">
