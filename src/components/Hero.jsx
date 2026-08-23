@@ -114,6 +114,10 @@ const Hero = () => {
           background-color: #ff5e43;
         }
 
+        .hero-dash-right {
+          display: none;
+        }
+
         .hero-name {
           font-family: 'Outfit', sans-serif;
           font-size: clamp(1.2rem, 2.5vw, 1.8rem);
@@ -184,7 +188,7 @@ const Hero = () => {
           gap: 16px;
         }
 
-        .hero-section-2-mobile {
+        .hero-social-mobile {
           display: none;
         }
 
@@ -401,93 +405,106 @@ const Hero = () => {
           }
         }
 
-        /* MOBILE OVERRIDES: EXACT 3-SECTION LAYOUT */
-        @media (max-width: 900px) {
+        /* PREMIUM MOBILE REDESIGN (CENTERED HERO FLOW) */
+        @media (max-width: 768px) {
           .hero-section {
             padding-top: 100px;
           }
           .hero-container {
-            padding: 0 16px;
-          }
-          .desktop-only-content {
-            display: none !important;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
           }
           .hero-top-grid {
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 12px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            width: 100%;
+            gap: 20px;
+          }
+          .hero-right {
+            order: 1; /* Profile Photo at Top on Mobile */
+            margin-bottom: 4px;
+          }
+          .hero-left {
+            order: 2;
+            align-items: center;
+            text-align: center;
+            width: 100%;
           }
           .hero-hello {
-            font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+            font-size: 2.2rem;
             margin-bottom: 4px;
+          }
+          .hero-name-row {
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
           }
           .hero-dash {
             width: 24px;
           }
-          .hero-name {
-            font-size: clamp(0.82rem, 2.5vw, 1.05rem);
+          .hero-dash-right {
+            display: block;
           }
-          .hero-name-row {
-            gap: 8px;
-            margin-bottom: 4px;
+          .hero-name {
+            font-size: 1.1rem;
           }
           .hero-title {
-            font-size: clamp(1.1rem, 3.4vw, 1.6rem);
-            line-height: 1.2;
-            margin-bottom: 4px;
+            font-size: 1.6rem;
+            line-height: 1.25;
+            margin-bottom: 6px;
+            text-align: center;
           }
           .hero-title-at {
-            display: block;
-            margin-left: 0;
-            font-size: 0.55em;
-            margin-top: 1px;
+            display: inline-block;
+            margin-left: 6px;
+            font-size: 0.6em;
             color: #94a3b8;
           }
           .hero-subtitle {
-            font-size: clamp(0.55rem, 1.8vw, 0.75rem);
-            letter-spacing: 0.02em;
-            margin: 0 0 8px 0;
-            line-height: 1.35;
+            justify-content: center;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+            min-height: 24px;
+          }
+          .hero-desc {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            text-align: center;
+            max-width: 100%;
+          }
+          .hero-buttons {
+            justify-content: center;
+            width: 100%;
+            max-width: 320px;
+            gap: 12px;
+            flex-direction: column;
+          }
+          .hero-buttons .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 10px 16px;
+            font-size: 0.85rem;
           }
           .hero-social-sidebar {
             display: none !important;
           }
-
-          /* SECTION 2: FULL WIDTH BELOW HERO TOP GRID */
-          .hero-section-2-mobile {
+          .hero-social-mobile {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            width: 100%;
-            margin-top: 24px;
-          }
-          .hero-section-2-mobile .hero-desc {
-            max-width: 100%;
-            margin-bottom: 24px;
-            text-align: left;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #94a3b8;
-          }
-          .hero-section-2-mobile .hero-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-start;
-            width: 100%;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-          }
-          .hero-section-2-mobile .hero-social-mobile {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             gap: 10px;
+            margin-top: 24px;
             width: 100%;
           }
           .hero-social-label {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.68rem;
+            font-size: 0.72rem;
             font-weight: 700;
             color: #ff5e43;
             letter-spacing: 0.15em;
@@ -495,11 +512,12 @@ const Hero = () => {
           .hero-social-icons {
             display: flex;
             align-items: center;
-            gap: 14px;
+            justify-content: center;
+            gap: 16px;
           }
           .hero-social-btn {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -516,21 +534,40 @@ const Hero = () => {
             transform: translateY(-2px);
           }
 
-          /* SECTION 3: FULL WIDTH SKILLS */
+          /* PROMINENT MOBILE AVATAR */
+          .avatar-container {
+            --avatar-w: 240px;
+            --avatar-h: 270px;
+            --avatar-glow-size: 240px;
+            --circle-red-size: 160px;
+            --circle-red-left: 15px;
+            --circle-red-bottom: 45px;
+            --circle-purple-size: 185px;
+            --circle-purple-right: 12px;
+            --circle-purple-top: 15px;
+            --circle-dashed-size: 210px;
+            --circle-dashed-top: 20px;
+            --circle-dashed-left: 15px;
+            --img-box-w: 200px;
+            --img-box-h: 250px;
+          }
+
+          /* FULL WIDTH SKILLS BAR */
           .skills-bar-wrapper {
             margin-top: 32px;
             padding: 20px 0;
           }
           .skills-bar-content {
-            padding: 0 20px;
+            padding: 0 16px;
             justify-content: center;
-            gap: 12px 20px;
+            gap: 10px 16px;
           }
           .skill-item {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
           }
+        }
 
-          /* SECTION 1 RIGHT PHOTO CONTAINER SIZING */
+        @media (max-width: 480px) {
           .avatar-container {
             --avatar-w: 200px;
             --avatar-h: 230px;
@@ -547,94 +584,36 @@ const Hero = () => {
             --img-box-w: 170px;
             --img-box-h: 210px;
           }
-        }
-
-        @media (max-width: 540px) {
-          .hero-top-grid {
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 8px;
-          }
-          .avatar-container {
-            --avatar-w: 145px;
-            --avatar-h: 175px;
-            --avatar-glow-size: 145px;
-            --circle-red-size: 95px;
-            --circle-red-left: 8px;
-            --circle-red-bottom: 22px;
-            --circle-purple-size: 115px;
-            --circle-purple-right: 6px;
-            --circle-purple-top: 10px;
-            --circle-dashed-size: 130px;
-            --circle-dashed-top: 12px;
-            --circle-dashed-left: 6px;
-            --img-box-w: 125px;
-            --img-box-h: 160px;
-          }
           .hero-hello {
-            font-size: 1.4rem;
-            margin-bottom: 2px;
-          }
-          .hero-dash {
-            width: 14px;
+            font-size: 1.95rem;
           }
           .hero-name {
-            font-size: 0.78rem;
-          }
-          .hero-name-row {
-            gap: 6px;
-            margin-bottom: 2px;
+            font-size: 1rem;
           }
           .hero-title {
-            font-size: 1.02rem;
-            line-height: 1.2;
-            margin-bottom: 2px;
+            font-size: 1.4rem;
           }
           .hero-subtitle {
-            font-size: 0.5rem;
-            line-height: 1.3;
-          }
-          .hero-section-2-mobile {
-            margin-top: 18px;
-          }
-          .hero-section-2-mobile .hero-desc {
-            font-size: 0.78rem;
-            line-height: 1.5;
-            margin-bottom: 16px;
-          }
-          .hero-section-2-mobile .hero-buttons {
-            flex-direction: column;
-            gap: 8px;
-            width: 100%;
-          }
-          .hero-section-2-mobile .hero-buttons .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 8px 10px;
             font-size: 0.75rem;
           }
+          .hero-desc {
+            font-size: 0.85rem;
+          }
           .hero-social-btn {
-            width: 32px;
-            height: 32px;
-          }
-          .skills-bar-wrapper {
-            padding: 16px 0;
-            margin-top: 20px;
-          }
-          .skills-bar-content {
-            padding: 0 12px;
-            gap: 8px 14px;
+            width: 38px;
+            height: 38px;
           }
           .skill-item {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
           }
         }
       `}</style>
 
       <section id="home" className="hero-section">
         <div className="hero-container">
-          {/* SECTION 1 — MAIN HERO (TOP ROW) */}
+          {/* MAIN HERO GRID (Desktop: 2 columns / Mobile: Top photo, centered content) */}
           <div className="hero-top-grid">
-            {/* LEFT */}
+            {/* LEFT / CONTENT */}
             <motion.div 
               className="hero-left"
               initial={{ opacity: 0, y: 30 }}
@@ -646,26 +625,42 @@ const Hero = () => {
               <div className="hero-name-row">
                 <div className="hero-dash" />
                 <span className="hero-name">I'm Hariharan</span>
+                <div className="hero-dash hero-dash-right" />
               </div>
               
-              <h2 className="hero-title">Founder & Lead Dev<span className="hero-title-at">at Skyrovix</span></h2>
+              <h2 className="hero-title">Founder & Lead Dev <span className="hero-title-at">at Skyrovix</span></h2>
               
               <TypewriterSubtitle />
 
-              {/* Desktop-only content rendered inside left column */}
-              <div className="desktop-only-content">
-                <p className="hero-desc">
-                  I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities.
-                </p>
-                
-                <div className="hero-buttons">
-                  <a href="#contact" className="btn btn-primary">Get a project!</a>
-                  <a href={`${import.meta.env.BASE_URL}Hariharan-CV.pdf`} download className="btn btn-secondary">Download CV</a>
+              <p className="hero-desc">
+                I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities.
+              </p>
+              
+              <div className="hero-buttons">
+                <a href="#contact" className="btn btn-primary">Get a project!</a>
+                <a href={`${import.meta.env.BASE_URL}Hariharan-CV.pdf`} download className="btn btn-secondary">Download CV</a>
+              </div>
+
+              <div className="hero-social-mobile">
+                <span className="hero-social-label">CONNECT WITH ME</span>
+                <div className="hero-social-icons">
+                  <a href="https://github.com/hariharan1022" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="GitHub">
+                    <Github size={18} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/hariharan-s-92b566381" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="LinkedIn">
+                    <Linkedin size={18} />
+                  </a>
+                  <a href="https://wa.me/919940773204" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="WhatsApp">
+                    <MessageSquare size={18} />
+                  </a>
+                  <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="Instagram">
+                    <Instagram size={18} />
+                  </a>
                 </div>
               </div>
             </motion.div>
 
-            {/* RIGHT */}
+            {/* RIGHT / PROFILE PHOTO */}
             <motion.div 
               className="hero-right"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -741,41 +736,6 @@ const Hero = () => {
               </div>
             </motion.div>
           </div>
-
-          {/* SECTION 2 — FULL WIDTH (MOBILE) */}
-          <motion.div 
-            className="hero-section-2-mobile"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <p className="hero-desc">
-              I build modern, scalable, and user-centric digital products that combine clean design, powerful backend architecture, and intelligent AI capabilities.
-            </p>
-            
-            <div className="hero-buttons">
-              <a href="#contact" className="btn btn-primary">Get a project!</a>
-              <a href={`${import.meta.env.BASE_URL}Hariharan-CV.pdf`} download className="btn btn-secondary">Download CV</a>
-            </div>
-
-            <div className="hero-social-mobile">
-              <span className="hero-social-label">CONNECT WITH ME</span>
-              <div className="hero-social-icons">
-                <a href="https://github.com/hariharan1022" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="GitHub">
-                  <Github size={18} />
-                </a>
-                <a href="https://www.linkedin.com/in/hariharan-s-92b566381" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="LinkedIn">
-                  <Linkedin size={18} />
-                </a>
-                <a href="https://wa.me/919940773204" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="WhatsApp">
-                  <MessageSquare size={18} />
-                </a>
-                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="hero-social-btn" aria-label="Instagram">
-                  <Instagram size={18} />
-                </a>
-              </div>
-            </div>
-          </motion.div>
         </div>
 
         {/* SECTION 3 — TECHNOLOGIES / SKILLS (FULL WIDTH) */}
